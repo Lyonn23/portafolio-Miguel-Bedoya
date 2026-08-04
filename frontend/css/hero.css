@@ -1,0 +1,289 @@
+/* ============================================================================
+   HERO.CSS — Portada + selector de disciplinas ("tracks")
+============================================================================ */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: var(--nav-h);
+  padding-bottom: var(--space-5);
+  position: relative;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+}
+
+/* ---------------- Foto de perfil "camuflada" ---------------- */
+.hero__visual {
+  position: absolute;
+  top: 50%;
+  right: -4%;
+  transform: translateY(-50%);
+  width: min(46%, 560px);
+  aspect-ratio: 3 / 4;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: contrast(1.05) brightness(0.95);
+  opacity: 0.95;
+  -webkit-mask-image: radial-gradient(ellipse 60% 65% at 50% 42%, black 35%, transparent 88%);
+  mask-image: radial-gradient(ellipse 60% 65% at 50% 42%, black 35%, transparent 88%);
+  animation: photo-emerge 1.6s var(--ease-out) both;
+  animation-delay: 0.2s;
+}
+
+.hero__visual canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes photo-emerge {
+  from { opacity: 0.25; filter: contrast(1.05) brightness(0.4) blur(1000px); }
+  to   { opacity: 0.95; filter: contrast(1.05) brightness(0.95) blur(1); }
+}
+
+@media (max-width: 960px) {
+  .hero {
+    align-items: flex-start;
+    text-align: left;
+    padding-top: calc(var(--nav-h) + 1rem);
+  }
+
+  .hero__content {
+    width: min(100%, 680px);
+    max-width: calc(100% - min(34vw, 320px));
+    padding-right: 1rem;
+  }
+
+  .hero__visual {
+    position: absolute;
+    top: 50%;
+    right: -2%;
+    transform: translateY(-50%);
+    width: min(34vw, 320px);
+    margin: 0;
+    opacity: 0.92;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    min-height: auto;
+    padding-top: calc(var(--nav-h) + 0.5rem);
+    padding-bottom: var(--space-4);
+  }
+
+  .hero__content {
+    max-width: none;
+    padding-right: 0;
+  }
+
+  .hero__visual {
+    position: relative;
+    inset: auto;
+    right: auto;
+    top: auto;
+    transform: none;
+    width: min(68%, 280px);
+    opacity: 0.9;
+    margin: 0 auto var(--space-3);
+    order: 2;
+  }
+
+  .hero__title {
+    max-width: none;
+    font-size: clamp(2.3rem, 12vw, 4rem);
+  }
+
+  .hero__bio {
+    max-width: 100%;
+    font-size: 0.98rem;
+  }
+
+  .hero__meta {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--font-mono);
+  font-size: var(--fs-tag);
+  color: var(--text-mid);
+  border: 1px solid var(--border-hair);
+  padding: 0.5em 1em;
+  border-radius: 999px;
+  margin-bottom: var(--space-3);
+  width: fit-content;
+}
+
+.hero__badge .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--neon);
+  box-shadow: 0 0 10px var(--neon-glow-a);
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+
+.hero__title {
+  font-size: clamp(2.8rem, 6.8vw, 5.6rem);
+  max-width: 10ch;
+  line-height: 0.95;
+}
+
+.hero__title-line {
+  display: block;
+  overflow: hidden;
+}
+
+.hero__role-wrap {
+  font-family: var(--font-mono);
+  font-size: clamp(1.1rem, 2.6vw, 1.6rem);
+  color: var(--neon);
+  margin-top: var(--space-2);
+  min-height: 1.6em;
+  text-shadow: 0 0 18px var(--neon-glow-b);
+}
+
+.hero__role-wrap::before { content: '> '; color: var(--text-low); }
+
+.hero__role-wrap .cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--neon);
+  margin-left: 2px;
+  vertical-align: -0.15em;
+  animation: blink 0.9s steps(1) infinite;
+}
+
+.hero__bio {
+  max-width: 54ch;
+  color: var(--text-mid);
+  margin-top: var(--space-3);
+  font-size: 1.05rem;
+}
+
+.hero__meta {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--fs-tag);
+  color: var(--text-low);
+  flex-wrap: wrap;
+}
+
+.hero__actions {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  flex-wrap: wrap;
+}
+
+/* ---------------- Tracks (selector de disciplinas) ---------------- */
+.tracks {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border-hair);
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-2);
+  border-bottom: 1px solid var(--border-hair);
+  position: relative;
+  transition: padding-left var(--dur-med) var(--ease-out), background var(--dur-med) var(--ease-out);
+  overflow: hidden;
+}
+
+.track::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--neon-glow-c), transparent 60%);
+  opacity: 0;
+  transition: opacity var(--dur-med) var(--ease-out);
+}
+
+.track:hover {
+  padding-left: var(--space-4);
+}
+
+.track:hover::before { opacity: 1; }
+
+.track__index {
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  color: var(--text-low);
+  width: 2.4ch;
+}
+
+.track__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+  flex: 1;
+}
+
+.track__label {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  transition: text-shadow var(--dur-med) var(--ease-out), color var(--dur-med) var(--ease-out);
+}
+
+.track:hover .track__label {
+  text-shadow: 0 0 22px var(--neon-glow-a);
+}
+
+.track__desc {
+  color: var(--text-mid);
+  font-size: 0.92rem;
+  max-width: 52ch;
+}
+
+.track__arrow {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  color: var(--text-low);
+  transform: translateX(-6px);
+  opacity: 0;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+
+.track:hover .track__arrow {
+  transform: translateX(0);
+  opacity: 1;
+  color: var(--neon);
+}
+
+@media (max-width: 640px) {
+  .track__desc { display: none; }
+}

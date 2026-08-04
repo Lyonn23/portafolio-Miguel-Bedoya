@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contacto — Miguel Bedoya</title>
+<meta name="description" content="Hablemos de tu próximo proyecto.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/hero.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/animations.css">
+</head>
+<body data-track="contacto">
+
+<canvas id="particle-canvas"></canvas>
+<div id="site-nav"></div>
+
+<main>
+  <section class="section" style="padding-top: calc(var(--nav-h) + var(--space-5));">
+    <div class="container">
+      <span class="eyebrow">05 — Contacto</span>
+      <h1 class="section-title" data-reveal>Cuéntame tu idea.</h1>
+      <p class="section-lede" data-reveal data-reveal-delay="80">
+        Ya sea un sitio web, una sesión fotográfica, una campaña de contenido o
+        el corte final de un video — escríbeme y lo hablamos.
+      </p>
+
+      <div class="contact-grid" style="margin-top: var(--space-5);">
+        <form class="form" id="contact-form" data-reveal data-reveal-delay="120">
+          <div class="field">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required placeholder="¿Cómo te llamas?">
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="tu@email.com">
+          </div>
+          <div class="field">
+            <label for="whatsapp">WhatsApp</label>
+            <input type="tel" id="whatsapp" name="whatsapp" placeholder="+57 310 000 0000">
+          </div>
+          <div class="field">
+            <label for="proyecto">Tipo de proyecto</label>
+            <input type="text" id="proyecto" name="proyecto" placeholder="Web, fotografía, contenido, video...">
+          </div>
+          <div class="field">
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" required placeholder="Cuéntame más sobre tu proyecto..."></textarea>
+          </div>
+
+          <!-- honeypot anti-spam: invisible para personas -->
+          <div class="field field--honeypot">
+            <label for="_gotcha">No llenar</label>
+            <input type="text" id="_gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
+          </div>
+
+          <button type="submit" class="btn btn--solid">Enviar mensaje</button>
+          <p class="form-status" id="form-status"></p>
+        </form>
+
+        <!-- Popup eliminado: ahora el envío muestra estado en el elemento .form-status -->
+
+        <div class="contact-info" data-reveal data-reveal-delay="200">
+          <div class="contact-info__item">
+            <span class="eyebrow">Email</span>
+            <a id="contact-email" href="#"></a>
+          </div>
+          <div class="contact-info__item">
+            <span class="eyebrow">Teléfono/Whatsapp</span>
+            <a id="contact-phone" href="#"></a>
+          </div>
+          <div class="contact-info__item">
+            <span class="eyebrow">Ubicación</span>
+            <span id="contact-location" style="font-family: var(--font-display); font-size: 1.3rem;"></span>
+          </div>
+          <div class="contact-info__item">
+            <span class="eyebrow">Redes</span>
+            <div id="contact-redes" style="margin-top: 0.4em;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="js/data.js"></script>
+<script src="js/components.js"></script>
+<script src="js/particles.js"></script>
+<script src="js/render.js"></script>
+<script src="js/main.js"></script>
+<script src="js/form.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Desarrollo Web — Miguel Bedoya</title>
+<meta name="description" content="Proyectos y stack de desarrollo web.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/hero.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/animations.css">
+</head>
+<body data-track="dev">
+
+<canvas id="particle-canvas"></canvas>
+<div id="site-nav"></div>
+
+<main>
+  <section class="section" style="padding-top: calc(var(--nav-h) + var(--space-5));">
+    <div class="container">
+      <span class="eyebrow">01 — Desarrollo Web</span>
+      <h1 class="section-title" data-reveal>Código con criterio.</h1>
+      <p class="section-lede" id="dev-intro" data-reveal data-reveal-delay="80"></p>
+
+      <div class="section__head" style="margin-top: var(--space-4); margin-bottom: var(--space-2);">
+        <span class="eyebrow">Servicios</span>
+      </div>
+
+      <div class="section-lede" style="margin-bottom: var(--space-3);" data-reveal data-reveal-delay="120">
+        Webs estratégicas para empresas y profesionales, e invitaciones digitales inolvidables para tus eventos más especiales.
+      </div>
+
+      <div class="chip-row" id="dev-servicios" data-reveal data-reveal-delay="140"></div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <div class="section__head">
+        <span class="eyebrow">GitHub</span>
+      </div>
+      <div id="github-card"></div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="js/data.js"></script>
+<script src="js/components.js"></script>
+<script src="js/particles.js"></script>
+<script src="js/render.js"></script>
+<script src="js/github.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

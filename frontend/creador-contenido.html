@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creación de Contenido — Miguel Bedoya</title>
+<meta name="description" content="Estrategia y piezas de contenido para redes sociales.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/hero.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/animations.css">
+</head>
+<body data-track="content">
+
+<canvas id="particle-canvas"></canvas>
+<div id="site-nav"></div>
+
+<main>
+  <section class="section" style="padding-top: calc(var(--nav-h) + var(--space-5));">
+    <div class="container">
+      <span class="eyebrow">03 — Creación de Contenido</span>
+      <h1 class="section-title" data-reveal>Ideas hechas para la pantalla.</h1>
+      <p class="section-lede" id="content-intro" data-reveal data-reveal-delay="80"></p>
+
+      <div class="stats" id="content-plataformas" style="margin-top: var(--space-4);" data-reveal data-reveal-delay="140"></div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <div class="section__head">
+        <span class="eyebrow">Piezas destacadas</span>
+      </div>
+      <div class="grid" id="content-piezas"></div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="js/data.js"></script>
+<script src="js/components.js"></script>
+<script src="js/particles.js"></script>
+<script src="js/render.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

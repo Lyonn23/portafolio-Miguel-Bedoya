@@ -1,0 +1,69 @@
+/* ==========================================================================
+   DESIGN TOKENS — Editar aquí cambia el look de TODO el sitio
+   ========================================================================== */
+
+:root {
+  /* ---- Color: base negro profundo + blanco neón ---- */
+  --bg-void:        #030303;   /* fondo general, casi negro absoluto */
+  --bg-surface:     #0b0b0d;   /* tarjetas / secciones elevadas */
+  --bg-surface-2:   #131316;   /* tarjetas hover / elevación 2 */
+  --border-hair:    rgba(255, 255, 255, 0.08);
+  --border-hair-lit:rgba(255, 255, 255, 0.22);
+
+  --neon:           #ffffff;                 /* blanco neón puro */
+  --neon-soft:      rgba(255, 255, 255, 0.75);
+  --neon-glow-a:    rgba(255, 255, 255, 0.55);
+  --neon-glow-b:    rgba(255, 255, 255, 0.18);
+  --neon-glow-c:    rgba(255, 255, 255, 0.06);
+
+  --text-hi:        #f4f4f5;   /* texto principal */
+  --text-mid:       #a3a3ab;   /* texto secundario */
+  --text-low:       #616168;   /* texto terciario / captions */
+
+  /* ---- Tipografía ---- */
+  --font-display: 'Unbounded', 'Arial Black', sans-serif; /* titulares, personalidad geométrica */
+  --font-body:    'Inter', -apple-system, sans-serif;      /* cuerpo de texto */
+  --font-mono:    'JetBrains Mono', 'Courier New', monospace; /* etiquetas, datos, código */
+
+  /* ---- Escala tipográfica ---- */
+  --fs-hero:   clamp(2.6rem, 7vw, 6.4rem);
+  --fs-h1:     clamp(2rem, 4.4vw, 3.6rem);
+  --fs-h2:     clamp(1.5rem, 3vw, 2.2rem);
+  --fs-h3:     clamp(1.15rem, 2vw, 1.5rem);
+  --fs-body:   1rem;
+  --fs-small:  0.85rem;
+  --fs-tag:    0.75rem;
+
+  /* ---- Espaciado ---- */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
+  --space-5: 4rem;
+  --space-6: 6rem;
+  --space-7: 9rem;
+
+  /* ---- Layout ---- */
+  --max-w: 1240px;
+  --radius: 4px;
+  --nav-h: 76px;
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 0.2s;
+  --dur-med: 0.5s;
+  --dur-slow: 0.9s;
+}
+
+/* ==========================================================================
+   TEMAS POR DISCIPLINA
+   Cada sección del portafolio recibe un leve tinte propio en el acento,
+   manteniendo la base neón blanca pero variando su "temperatura".
+   Editar estos valores per-página vía atributo data-track en <body>.
+   ========================================================================== */
+
+body[data-track="dev"]     { --track-tint: 255, 255, 255; }
+body[data-track="foto"]    { --track-tint: 255, 255, 255; }
+body[data-track="content"] { --track-tint: 255, 255, 255; }
+body[data-track="video"]   { --track-tint: 255, 255, 255; }

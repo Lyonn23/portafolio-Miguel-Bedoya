@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fotografía — Miguel Bedoya</title>
+<meta name="description" content="Galería de fotografía: retrato, calle, producto, paisaje y editorial.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/hero.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/animations.css">
+</head>
+<body data-track="foto">
+
+<canvas id="particle-canvas"></canvas>
+<div id="site-nav"></div>
+
+<main>
+  <section class="section" style="padding-top: calc(var(--nav-h) + var(--space-5));">
+    <div class="container">
+      <span class="eyebrow">02 — Fotografía</span>
+      <h1 class="section-title" data-reveal>Luz, encuadre, instante.</h1>
+      <p class="section-lede" id="foto-intro" data-reveal data-reveal-delay="80"></p>
+
+      <ul class="chip-row" id="foto-equipo" style="margin-top: var(--space-3); font-family: var(--font-mono); font-size: var(--fs-tag); color: var(--text-mid); gap: var(--space-3);" data-reveal data-reveal-delay="140"></ul>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <div class="section__head">
+        <span class="eyebrow">Galería</span>
+      </div>
+      <div class="gallery" id="foto-galeria"></div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="js/data.js"></script>
+<script src="js/components.js"></script>
+<script src="js/particles.js"></script>
+<script src="js/render.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

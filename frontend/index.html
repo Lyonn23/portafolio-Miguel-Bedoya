@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Miguel Bedoya — Portafolio</title>
+<meta name="description" content="Portafolio de desarrollo web, fotografía, creación de contenido y edición de video.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/hero.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/animations.css">
+</head>
+<body data-track="home">
+
+<canvas id="particle-canvas"></canvas>
+<div id="site-nav"></div>
+
+<main>
+
+  <section class="hero container">
+
+    <div class="hero__visual" aria-hidden="true">
+      <img src="assets/perfil.jpg" alt="" class="hero__photo" id="hero-photo">
+      <canvas id="hero-photo-canvas"></canvas>
+    </div>
+
+    <div class="hero__content">
+      <span class="hero__badge" id="availability-badge">
+        <span class="dot"></span> Disponible para proyectos
+      </span>
+
+      <h1 class="hero__title">Diseño, construyo<br>y cuento historias.</h1>
+
+      <div class="hero__role-wrap">
+        <span id="role-typer"></span><span class="cursor"></span>
+      </div>
+
+      <p class="hero__bio" id="hero-bio"></p>
+
+      <div class="hero__meta">
+        <span id="hero-location"></span>
+        <span>Full-stack · Visual · Narrativo</span>
+      </div>
+
+      <div class="hero__actions">
+        <a href="contacto.html" class="btn btn--solid">Hablemos de tu proyecto</a>
+        <a href="assets/Miguel Bedoya CV..pdf.pdf" class="btn" target="_blank" rel="noopener" download>Ver mi CV</a>
+        <a href="#tracks" class="btn">Ver mi trabajo</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="tracks">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <span class="eyebrow">Cuatro disciplinas, una sola visión</span>
+          <h2 class="section-title">Elige por dónde empezar</h2>
+        </div>
+      </div>
+      <div class="tracks" id="home-tracks"></div>
+    </div>
+  </section>
+
+</main>
+
+<div id="site-footer"></div>
+
+<script src="js/data.js"></script>
+<script src="js/components.js"></script>
+<script src="js/particles.js"></script>
+<script src="js/render.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
