@@ -4,7 +4,14 @@
    Cambia API_URL si despliegas el backend en otra dirección/dominio.
 ============================================================================ */
 
-const API_URL = 'http://localhost:3000/api/contacto';
+const API_URL = (() => {
+  const sameOrigin = '/api/contacto';
+  const localBackend = 'http://localhost:3000/api/contacto';
+  if (window.location.hostname === 'localhost' && window.location.port && window.location.port !== '3000') {
+    return localBackend;
+  }
+  return sameOrigin;
+})();
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log('[form.js] DOMContentLoaded');

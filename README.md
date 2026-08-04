@@ -132,13 +132,32 @@ quieres que se note más o menos, ajusta en `frontend/css/hero.css`:
 - `mask-image: radial-gradient(...)` → qué tanto se disuelven los bordes.
 
 ## Publicar el sitio (frontend)
-
+ 
 El frontend es HTML/CSS/JS puro, así que puedes subirlo gratis a:
-
+ 
 - **GitHub Pages**: sube la carpeta `frontend/` a un repositorio y activa Pages.
 - **Netlify / Vercel**: arrastra la carpeta `frontend/` a su panel — despliegue instantáneo.
+ 
+### Despliegue completo en Vercel
 
-Para el backend (si quieres que el formulario funcione en producción),
+Este repositorio ya incluye un archivo `vercel.json` y una API de Vercel en
+`api/` para que el formulario de contacto funcione en el mismo despliegue.
+
+1. Conecta tu repositorio a Vercel.
+2. Si quieres recibir los mensajes por correo, configura estas variables de
+   entorno en Vercel:
+   - `GMAIL_USER`
+   - `GMAIL_APP_PASSWORD`
+   - `CONTACT_TO` (opcional, por defecto usa `beleonnm@gmail.com`)
+3. Despliega el proyecto. El frontend estará servido desde `frontend/` y el
+   endpoint del formulario estará disponible en `/api/contacto`.
+
+> Nota: Vercel no conserva archivos locales como `backend/mensajes.json`
+> entre invocaciones. Por eso el envío de mensajes en Vercel depende del correo
+> electrónico. Si deseas almacenamiento permanente, usa un backend con base de
+> datos o un servicio especializado.
+ 
+Para el backend local (si quieres probar el formulario en tu máquina),
 usa un servicio como Render o Railway, que soportan Node.js/Express gratis
 en su plan básico.
 
