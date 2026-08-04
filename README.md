@@ -156,6 +156,10 @@ Este repositorio ya incluye un archivo `vercel.json` y una API de Vercel en
 > entre invocaciones. Por eso el envío de mensajes en Vercel depende del correo
 > electrónico. Si deseas almacenamiento permanente, usa un backend con base de
 > datos o un servicio especializado.
+
+> Importante: en producción Vercel usa un sistema de archivos sensible a mayúsculas,
+> por lo que cualquier ruta de imagen debe coincidir exactamente con el nombre del
+> archivo en `frontend/assets/`.
  
 Para el backend local (si quieres probar el formulario en tu máquina),
 usa un servicio como Render o Railway, que soportan Node.js/Express gratis
