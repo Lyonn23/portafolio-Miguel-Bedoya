@@ -45,6 +45,16 @@
   transition: box-shadow var(--dur-fast) var(--ease-out);
 }
 
+/* Logo image used instead of initials */
+.nav__brand-logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border-hair-lit);
+  display: inline-block;
+}
+
 .nav__brand:hover .nav__brand-mark {
   box-shadow: 0 0 18px var(--neon-glow-b);
 }

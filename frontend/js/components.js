@@ -28,7 +28,7 @@ function renderNav() {
   mount.innerHTML = `
     <nav class="nav" id="nav">
       <a href="index.html" class="nav__brand" aria-label="${nombre} — inicio">
-        <span class="nav__brand-mark">${inicial}</span>
+        <img class="nav__brand-logo" src="assets/logo.png" alt="${nombre} — logo">
         <span class="nav__brand-name">${nombre}</span>
       </a>
 
@@ -68,7 +68,7 @@ function renderFooter() {
     <footer class="footer">
       <div class="footer__inner">
         <div class="footer__col">
-          <span class="nav__brand-mark">${PORTFOLIO_DATA.perfil.inicial}</span>
+          <img class="nav__brand-logo" src="assets/logo.png" alt="${PORTFOLIO_DATA.perfil.nombre} — logo">
           <p class="footer__tagline">${PORTFOLIO_DATA.perfil.tagline}</p>
         </div>
 

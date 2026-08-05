@@ -167,11 +167,28 @@ module.exports = async (req, res) => {
     console.error('Error guardando mensaje:', err);
   }
 
-  if (process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD) {
-    enviarEmailNotificacion(entry).catch(err => console.error('Error enviando email:', err));
+  const emailConfigured = Boolean(process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD);
+  const emailDestination = process.env.CONTACT_TO || 'beleonnm@gmail.com';
+
+  if (emailConfigured) {
+    try {
+      await enviarEmailNotificacion(entry);
+    } catch (err) {
+      console.error('Error enviando email:', err);
+      res.status(502).json({
+        error: 'El mensaje se guardó, pero no se pudo enviar el correo. Revisa tus variables de entorno de Vercel y la contraseña de aplicación de Gmail.'
+      });
+      return;
+    }
   } else {
     console.warn('Email no configurado. Coloca GMAIL_USER y GMAIL_APP_PASSWORD en las variables de entorno de Vercel.');
   }
 
-  res.status(200).json({ ok: true, message: 'Mensaje recibido correctamente.' });
+  res.status(200).json({
+    ok: true,
+    message: 'Mensaje recibido correctamente.',
+    emailConfigured,
+    emailTo: emailDestination,
+    warning: emailConfigured ? undefined : 'Email no configurado; el mensaje no fue guardado de forma permanente en Vercel y no se envió por correo.'
+  });
 };

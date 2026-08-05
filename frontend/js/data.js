@@ -68,12 +68,12 @@ const PORTFOLIO_DATA = {
     intro: "Capturo luz, momentos y composición. Retrato, calle y producto — siempre buscando el encuadre que no se explica, se siente.",
     equipo: ["Cámara: Canon EOS Rebel T7 y Iphone 14 PRO MAX", "Lentes: 55mm", "Edición: Lightroom + Photoshop"],
     galeria: [
-      { titulo: "Serie Retrato",   categoria: "Retrato",  imagen: "assets/foto-1.jpg" },
-      { titulo: "Serie paisaje",    categoria: "Paisaje",    imagen: "assets/foto-2.jpg" },
-      { titulo: "Serie paisaje",  categoria: "Paisaje", imagen: "assets/foto-3.jpg" },
-      { titulo: "Serie flores",   categoria: "Flores",  imagen: "assets/foto-4.jpg" },
-      { titulo: "Serie retrato",    categoria: "Retrato",   imagen: "assets/foto-5.jpg" },
-      { titulo: "Serie paisaje", categoria: "Paisaje",imagen: "assets/foto-6.jpg" }
+      { titulo: "Serie Retrato",   categoria: "Retrato",  imagen: "assets/fotografia-1.jpg" },
+      { titulo: "Serie paisaje",    categoria: "Paisaje",    imagen: "assets/fotografia-2.jpg" },
+      { titulo: "Serie paisaje",  categoria: "Paisaje", imagen: "assets/fotografia-3.jpg" },
+      { titulo: "Serie flores",   categoria: "Flores",  imagen: "assets/fotografia-4.jpg" },
+      { titulo: "Serie retrato",    categoria: "Retrato",   imagen: "assets/fotografia-5.jpg" },
+      { titulo: "Serie paisaje", categoria: "Paisaje",imagen: "assets/fotografia-6.jpg" }
     ]
   },
 

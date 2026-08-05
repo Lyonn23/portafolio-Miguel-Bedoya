@@ -157,9 +157,15 @@ Este repositorio ya incluye un archivo `vercel.json` y una API de Vercel en
 > electrónico. Si deseas almacenamiento permanente, usa un backend con base de
 > datos o un servicio especializado.
 
-> Importante: en producción Vercel usa un sistema de archivos sensible a mayúsculas,
-> por lo que cualquier ruta de imagen debe coincidir exactamente con el nombre del
-> archivo en `frontend/assets/`.
+> Importante: en producción Vercel usa un sistema de archivos sensible a mayúsculas.
+> Si tu repo viene de Windows, Git puede no detectar solo cambios de mayúsculas
+> en los nombres de archivos. Para asegurarte de que las imágenes cambien de
+> `foto-1.JPG` a `foto-1.jpg`, renómbralas primero a un nombre intermedio
+> (`foto-1-temp.jpg`) y luego al nombre final (`foto-1.jpg`) antes de subir.
+
+> El endpoint `/api/contacto` ahora reporta explícitamente si el correo no está
+> configurado, y devolverá un error si el envío por Gmail falla por credenciales
+> incorrectas o por variables de entorno mal puestas.
  
 Para el backend local (si quieres probar el formulario en tu máquina),
 usa un servicio como Render o Railway, que soportan Node.js/Express gratis
