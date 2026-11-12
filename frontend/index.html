@@ -1,86 +1,170 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Miguel Bedoya — Portafolio</title>
-<meta name="description" content="Portafolio de desarrollo web, fotografía, creación de contenido y edición de video.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Miguel Bedoya — Creative Suite // Code · Photo · Content · Video</title>
+  <meta name="description" content="Portafolio multidisciplinario de Miguel Bedoya: Desarrollo web, fotografía, creación de contenido y edición de video cinemática.">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Tipografía Premium: Syne (Headings de impacto), Unbounded (Display futurista), Plus Jakarta Sans (Lectura clara), JetBrains Mono (HUD) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&family=Unbounded:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
-<link rel="preload" href="css/variables.css" as="style">
-<link rel="preload" href="css/base.css" as="style">
-<link rel="stylesheet" href="css/variables.css">
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/nav.css">
-<link rel="stylesheet" href="css/hero.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/animations.css">
-<link rel="icon" href="assets/logo.png" type="image/png">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="icon" href="assets/logo.png" type="image/png">
 </head>
 <body data-track="home">
 
-<canvas id="particle-canvas"></canvas>
-<div id="site-nav"></div>
+  <!-- Canvas de partículas / embers volcánicos -->
+  <canvas id="particle-canvas" style="position: fixed; inset: 0; pointer-events: none; z-index: 1;"></canvas>
 
-<main>
+  <!-- Navegación Flotante -->
+  <div id="site-nav"></div>
 
-  <section class="hero container">
+  <main>
+    <!-- HERO SECTION — "GEAR REVEAL" -->
+    <section class="hero container">
+      <!-- HUD Registration Markers (Video aesthetic) -->
+      <div class="hud-marker hud-marker--tl"></div>
+      <div class="hud-marker hud-marker--tr"></div>
+      <div class="hud-marker hud-marker--bl"></div>
+      <div class="hud-marker hud-marker--br"></div>
 
-    <div class="hero__visual" aria-hidden="true">
-      <img src="assets/perfil.jpg" alt="" class="hero__photo" id="hero-photo">
-      <canvas id="hero-photo-canvas"></canvas>
-    </div>
-
-    <div class="hero__content">
-      <span class="hero__badge" id="availability-badge">
-        <span class="dot"></span> Disponible para proyectos
-      </span>
-
-      <h1 class="hero__title">Diseño, construyo<br>y cuento historias.</h1>
-
-      <div class="hero__role-wrap">
-        <span id="role-typer"></span><span class="cursor"></span>
+      <!-- Concentric Stadium Rings (Motivo icónico del video) -->
+      <div class="stadium-bg" aria-hidden="true">
+        <svg viewBox="0 0 600 750" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Anillos concéntricos tipo pista de carreras / estadio -->
+          <rect class="stadium-ring" x="240" y="315" width="120" height="120" rx="60" />
+          <rect class="stadium-ring" x="200" y="275" width="200" height="200" rx="100" />
+          <rect class="stadium-ring stadium-ring--core" x="160" y="225" width="280" height="300" rx="140" />
+          <rect class="stadium-ring" x="120" y="175" width="360" height="400" rx="180" />
+          <rect class="stadium-ring" x="80" y="125" width="440" height="500" rx="220" />
+          <rect class="stadium-ring" x="40" y="75" width="520" height="600" rx="260" />
+          <rect class="stadium-ring" x="10" y="25" width="580" height="700" rx="290" />
+        </svg>
       </div>
 
-      <p class="hero__bio" id="hero-bio"></p>
+      <div class="hero__inner">
+        <!-- Columna Izquierda: Información & Titular -->
+        <div class="hero__content">
+          <div class="hero__badge" id="availability-badge">
+            <span class="dot"></span> Disponible para proyectos 2026
+          </div>
 
-      <div class="hero__meta">
-        <span id="hero-location"></span>
-        <span>Full-stack · Visual · Narrativo</span>
-      </div>
+          <h1 class="hero__title">
+            Diseño, construyo<br>
+            <span class="hero__title-accent">&amp; cuento historias.</span>
+          </h1>
 
-      <div class="hero__actions">
-        <a href="contacto.html" class="btn btn--solid">Hablemos de tu proyecto</a>
-        <a href="assets/Miguel Bedoya CV..pdf.pdf" class="btn" target="_blank" rel="noopener" download>Ver mi CV</a>
-        <a href="#tracks" class="btn">Ver mi trabajo</a>
-      </div>
-    </div>
-  </section>
+          <div class="hero__role-wrap">
+            <span id="role-typer"></span><span class="cursor"></span>
+          </div>
 
-  <section class="section" id="tracks">
-    <div class="container">
-      <div class="section__head">
-        <div>
-          <span class="eyebrow">Cuatro disciplinas, una sola visión</span>
-          <h2 class="section-title">Elige por dónde empezar</h2>
+          <p class="hero__bio" id="hero-bio"></p>
+
+          <div class="hero__meta" id="hero-location"></div>
+
+          <div class="hero__actions">
+            <a href="contacto.html" class="btn btn--solid">Iniciar Proyecto ↗</a>
+            <a href="assets/Miguel Bedoya CV..pdf.pdf" class="btn" target="_blank" rel="noopener" download>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              Descargar CV
+            </a>
+            <a href="#tracks" class="btn btn--ghost">Explorar Trabajo ↓</a>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Hero Showcase 3D con Foto de Miguel -->
+        <div class="hero__visual-container">
+          <div class="hero__visual-card">
+            <!-- Halo Trasero de Luz Volcánica -->
+            <div class="hero__halo"></div>
+
+            <!-- Floating Micro-Badges alrededor de la foto -->
+            <div class="hero__pill-tag hero__pill-tag--top-left">
+              <span class="tag-indicator"></span>
+              <span>DEV // FULL-STACK</span>
+            </div>
+
+            <div class="hero__pill-tag hero__pill-tag--mid-left">
+              <span class="tag-indicator"></span>
+              <span>CANON EOS T7 · 55MM</span>
+            </div>
+
+            <div class="hero__pill-tag hero__pill-tag--bottom-right">
+              <span class="tag-indicator"></span>
+              <span>+29K VIEWS VIRAL</span>
+            </div>
+
+            <!-- Envoltorio de la foto con corte orgánico curvado -->
+            <div class="hero__photo-wrapper">
+              <img src="assets/perfil.jpg" alt="Miguel Bedoya — Desarrollador y Creador Audiovisual" class="hero__photo" id="hero-photo">
+            </div>
+          </div>
         </div>
       </div>
-      <div class="tracks" id="home-tracks"></div>
-    </div>
-  </section>
+    </section>
 
-</main>
+    <!-- SELECTOR DE DISCIPLINAS (CÁPSULAS INTERACTIVAS) -->
+    <section class="section" id="tracks">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <span class="eyebrow">Creative Suite // 4 Disciplinas</span>
+            <h2 class="section-title">Elige por dónde empezar</h2>
+          </div>
+          <p class="section-lede" style="margin-top: 0;">
+            Cada disciplina complementa a la otra para entregar proyectos visuales y técnicos sin fisuras.
+          </p>
+        </div>
 
-<div id="site-footer"></div>
+        <div class="tracks" id="home-tracks"></div>
+      </div>
+    </section>
 
-<script src="js/data.js" defer></script>
-<script src="js/components.js" defer></script>
-<script src="js/particles.js" defer></script>
-<script src="js/render.js" defer></script>
-<script src="js/main.js" defer></script>
-<script src="js/antiinspect.js" defer></script>
+    <!-- VISTA PREVIA DESTACADA (HIGHLIGHTS EN VIVO) -->
+    <section class="section section--tight" id="highlights-section">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <span class="eyebrow">Highlights // Muestra Directa</span>
+            <h2 class="section-title">Producción Seleccionada</h2>
+          </div>
+          <p class="section-lede" style="margin-top: 0;">
+            Un vistazo inmediato a piezas de video, fotografía y métricas de impacto sin salir del inicio.
+          </p>
+        </div>
+
+        <div id="home-highlights"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js" defer></script>
+  <script src="js/components.js" defer></script>
+  <script src="js/particles.js" defer></script>
+  <script src="js/render.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/antiinspect.js" defer></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initParticles('particle-canvas', {
+        density: 16000,
+        maxParticles: 80,
+        colorRgb: '255, 30, 66',
+        speed: 0.22
+      });
+    });
+  </script>
 </body>
 </html>

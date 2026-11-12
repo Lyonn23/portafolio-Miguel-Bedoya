@@ -1,106 +1,138 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contacto — Miguel Bedoya</title>
-<meta name="description" content="Hablemos de tu próximo proyecto.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto — Miguel Bedoya</title>
+  <meta name="description" content="Inicia tu proyecto de desarrollo web, fotografía, contenido o video con Miguel Bedoya.">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&family=Unbounded:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
-<link rel="preload" href="css/variables.css" as="style">
-<link rel="preload" href="css/base.css" as="style">
-<link rel="stylesheet" href="css/variables.css">
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/nav.css">
-<link rel="stylesheet" href="css/hero.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/animations.css">
-<link rel="icon" href="assets/logo.png" type="image/png">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="icon" href="assets/logo.png" type="image/png">
 </head>
 <body data-track="contacto">
 
-<canvas id="particle-canvas"></canvas>
-<div id="site-nav"></div>
+  <canvas id="particle-canvas" style="position: fixed; inset: 0; pointer-events: none; z-index: 1;"></canvas>
+  <div id="site-nav"></div>
 
-<main>
-  <section class="section" style="padding-top: calc(var(--nav-h) + var(--space-5));">
-    <div class="container">
-      <span class="eyebrow">05 — Contacto</span>
-      <h1 class="section-title" data-reveal>Cuéntame tu idea.</h1>
-      <p class="section-lede" data-reveal data-reveal-delay="80">
-        Ya sea un sitio web, una sesión fotográfica, una campaña de contenido o
-        el corte final de un video — escríbeme y lo hablamos.
-      </p>
+  <main>
+    <section class="section" style="padding-top: calc(var(--nav-h) + var(--space-5)); position: relative;">
+      <div class="hud-marker hud-marker--tl"></div>
+      <div class="hud-marker hud-marker--tr"></div>
 
-      <div class="contact-grid" style="margin-top: var(--space-5);">
-        <form class="form" id="contact-form" data-reveal data-reveal-delay="120">
-          <div class="field">
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" name="nombre" required placeholder="¿Cómo te llamas?">
-          </div>
-          <div class="field">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required placeholder="tu@email.com">
-          </div>
-          <div class="field">
-            <label for="whatsapp">WhatsApp</label>
-            <input type="tel" id="whatsapp" name="whatsapp" placeholder="+57 310 000 0000">
-          </div>
-          <div class="field">
-            <label for="proyecto">Tipo de proyecto</label>
-            <input type="text" id="proyecto" name="proyecto" placeholder="Web, fotografía, contenido, video...">
-          </div>
-          <div class="field">
-            <label for="mensaje">Mensaje</label>
-            <textarea id="mensaje" name="mensaje" required placeholder="Cuéntame más sobre tu proyecto..."></textarea>
-          </div>
+      <div class="container">
+        <span class="eyebrow">05 — Conexión &amp; Proyectos</span>
+        <h1 class="section-title" data-reveal>Cuéntame tu idea.</h1>
+        <p class="section-lede" data-reveal data-reveal-delay="80">
+          Ya sea un sitio web estratégico, una sesión fotográfica, una campaña de contenido o
+          el corte final de un video comercial — construyámoslo juntos.
+        </p>
 
-          <!-- honeypot anti-spam: invisible para personas -->
-          <div class="field field--honeypot">
-            <label for="_gotcha">No llenar</label>
-            <input type="text" id="_gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
-          </div>
+        <div class="contact-grid" style="margin-top: var(--space-5);">
+          <!-- Formulario Glassmorphic -->
+          <form class="form" id="contact-form" data-reveal data-reveal-delay="120">
+            <div class="field">
+              <label for="nombre">Nombre o Empresa</label>
+              <input type="text" id="nombre" name="nombre" required placeholder="¿Cómo te llamas?">
+            </div>
 
-          <button type="submit" class="btn btn--solid">Enviar mensaje</button>
-          <p class="form-status" id="form-status"></p>
-        </form>
+            <div class="field">
+              <label for="email">Correo Electrónico</label>
+              <input type="email" id="email" name="email" required placeholder="tu@email.com">
+            </div>
 
-        <!-- Popup eliminado: ahora el envío muestra estado en el elemento .form-status -->
+            <div class="field">
+              <label for="whatsapp">WhatsApp / Teléfono</label>
+              <input type="tel" id="whatsapp" name="whatsapp" placeholder="+57 310 000 0000">
+            </div>
 
-        <div class="contact-info" data-reveal data-reveal-delay="200">
-          <div class="contact-info__item">
-            <span class="eyebrow">Email</span>
-            <a id="contact-email" href="#"></a>
-          </div>
-          <div class="contact-info__item">
-            <span class="eyebrow">Teléfono/Whatsapp</span>
-            <a id="contact-phone" href="#"></a>
-          </div>
-          <div class="contact-info__item">
-            <span class="eyebrow">Ubicación</span>
-            <span id="contact-location" style="font-family: var(--font-display); font-size: 1.3rem;"></span>
-          </div>
-          <div class="contact-info__item">
-            <span class="eyebrow">Redes</span>
-            <div id="contact-redes" style="margin-top: 0.4em;"></div>
+            <div class="field">
+              <label for="proyecto">Disciplina o Tipo de Proyecto</label>
+              <input type="text" id="proyecto" name="proyecto" placeholder="Web, Fotografía, Contenido, Video...">
+            </div>
+
+            <div class="field">
+              <label for="mensaje">Mensaje / Objetivos</label>
+              <textarea id="mensaje" name="mensaje" required placeholder="Cuéntame sobre tu proyecto, plazos e ideas principales..."></textarea>
+            </div>
+
+            <!-- Honeypot anti-spam -->
+            <div class="field field--honeypot">
+              <label for="_gotcha">No llenar</label>
+              <input type="text" id="_gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
+            </div>
+
+            <button type="submit" class="btn btn--solid" style="padding: 1rem 2rem; font-size: 0.95rem;">
+              <span>Enviar Mensaje</span>
+              <span>↗</span>
+            </button>
+            <p class="form-status" id="form-status"></p>
+          </form>
+
+          <!-- Tarjetas de Información Directa -->
+          <div class="contact-info" data-reveal data-reveal-delay="160">
+            <!-- WhatsApp Rápido -->
+            <div class="contact-info__card" style="border-color: rgba(255, 45, 75, 0.4); background: rgba(30, 4, 8, 0.8);">
+              <span class="eyebrow" style="margin-bottom: 0.75rem;">Canal Inmediato</span>
+              <h3>WhatsApp Directo</h3>
+              <p style="font-size: 0.92rem; margin-bottom: 1rem;">Para consultas directas, presupuestos rápidos o agendar llamadas.</p>
+              <a id="contact-whatsapp" class="btn btn--solid" target="_blank" rel="noopener" style="font-size: 0.85rem; width: 100%;">
+                <span>Chatear por WhatsApp</span>
+                <span>↗</span>
+              </a>
+            </div>
+
+            <!-- Email -->
+            <div class="contact-info__card">
+              <span class="eyebrow" style="margin-bottom: 0.75rem;">Correo Oficial</span>
+              <h3>Email</h3>
+              <a id="contact-email"></a>
+            </div>
+
+            <!-- Ubicación -->
+            <div class="contact-info__card">
+              <span class="eyebrow" style="margin-bottom: 0.75rem;">Base de Operaciones</span>
+              <h3>Ubicación</h3>
+              <p id="contact-location" style="font-family: var(--font-mono); font-size: 0.9rem; color: #ffffff;"></p>
+            </div>
+
+            <!-- Redes Sociales -->
+            <div class="contact-info__card">
+              <span class="eyebrow" style="margin-bottom: 0.75rem;">Redes Sociales</span>
+              <div id="contact-redes" class="chip-row" style="margin-top: 0.5rem;"></div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-</main>
+    </section>
+  </main>
 
-<div id="site-footer"></div>
+  <div id="site-footer"></div>
 
-<script src="js/data.js" defer></script>
-<script src="js/components.js" defer></script>
-<script src="js/particles.js" defer></script>
-<script src="js/render.js" defer></script>
-<script src="js/main.js" defer></script>
-<script src="js/form.js" defer></script>
-<script src="js/antiinspect.js" defer></script>
+  <script src="js/data.js" defer></script>
+  <script src="js/components.js" defer></script>
+  <script src="js/particles.js" defer></script>
+  <script src="js/render.js" defer></script>
+  <script src="js/form.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/antiinspect.js" defer></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initParticles('particle-canvas', {
+        density: 16000,
+        maxParticles: 75,
+        colorRgb: '255, 40, 75'
+      });
+    });
+  </script>
 </body>
 </html>

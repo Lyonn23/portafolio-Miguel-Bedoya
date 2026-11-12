@@ -1,58 +1,82 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Edición de Video — Miguel Bedoya</title>
-<meta name="description" content="Proyectos de edición de video: comerciales, documentales y videoclips.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edición de Video — Miguel Bedoya</title>
+  <meta name="description" content="Edición audiovisual profesional, color grading, montaje de ritmo y post-producción por Miguel Bedoya.">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&family=Unbounded:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
-<link rel="preload" href="css/variables.css" as="style">
-<link rel="preload" href="css/base.css" as="style">
-<link rel="stylesheet" href="css/variables.css">
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/nav.css">
-<link rel="stylesheet" href="css/hero.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/animations.css">
-<link rel="icon" href="assets/logo.png" type="image/png">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="icon" href="assets/logo.png" type="image/png">
 </head>
 <body data-track="video">
 
-<canvas id="particle-canvas"></canvas>
-<div id="site-nav"></div>
+  <canvas id="particle-canvas" style="position: fixed; inset: 0; pointer-events: none; z-index: 1;"></canvas>
+  <div id="site-nav"></div>
 
-<main>
-  <section class="section" style="padding-top: calc(var(--nav-h) + var(--space-5));">
-    <div class="container">
-      <span class="eyebrow">04 — Edición de Video</span>
-      <h1 class="section-title" data-reveal>Ritmo, corte, color.</h1>
-      <p class="section-lede" id="video-intro" data-reveal data-reveal-delay="80"></p>
+  <main>
+    <section class="section" style="padding-top: calc(var(--nav-h) + var(--space-5)); position: relative;">
+      <div class="hud-marker hud-marker--tl"></div>
+      <div class="hud-marker hud-marker--tr"></div>
 
-      <ul class="chip-row" id="video-herramientas" style="margin-top: var(--space-3);" data-reveal data-reveal-delay="140"></ul>
-    </div>
-  </section>
+      <div class="container">
+        <span class="eyebrow">04 — Post-Producción &amp; Montaje</span>
+        <h1 class="section-title" data-reveal>Ritmo, corte, color.</h1>
+        <p class="section-lede" id="video-intro" data-reveal data-reveal-delay="80"></p>
 
-  <section class="section section--tight">
-    <div class="container">
-      <div class="section__head">
-        <span class="eyebrow">Proyectos</span>
+        <!-- Software de Edición -->
+        <div class="section__head" style="margin-top: var(--space-4); margin-bottom: var(--space-2);">
+          <div>
+            <span class="eyebrow">Suite de Post</span>
+            <h2 class="section-title" style="font-size: var(--fs-h2);">Herramientas &amp; Software</h2>
+          </div>
+        </div>
+
+        <ul class="chip-row" id="video-herramientas" data-reveal data-reveal-delay="120"></ul>
       </div>
-      <div class="grid" id="video-proyectos"></div>
-    </div>
-  </section>
-</main>
+    </section>
 
-<div id="site-footer"></div>
+    <!-- Proyectos de Video -->
+    <section class="section section--tight">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <span class="eyebrow">Reel &amp; Producciones</span>
+            <h2 class="section-title" style="font-size: var(--fs-h2);">Proyectos Audiovisuales</h2>
+          </div>
+        </div>
 
-<script src="js/data.js" defer></script>
-<script src="js/components.js" defer></script>
-<script src="js/particles.js" defer></script>
-<script src="js/render.js" defer></script>
-<script src="js/main.js" defer></script>
-<script src="js/antiinspect.js" defer></script>
+        <div class="grid" id="video-proyectos"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/data.js" defer></script>
+  <script src="js/components.js" defer></script>
+  <script src="js/particles.js" defer></script>
+  <script src="js/render.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/antiinspect.js" defer></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initParticles('particle-canvas', {
+        density: 16000,
+        maxParticles: 75,
+        colorRgb: '255, 30, 66'
+      });
+    });
+  </script>
 </body>
 </html>
