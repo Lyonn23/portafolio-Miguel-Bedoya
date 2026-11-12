@@ -8,7 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&family=Unbounded:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Michroma&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Syncopate:wght@400;700&family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
@@ -20,41 +20,28 @@
 </head>
 <body data-track="content">
 
-  <canvas id="particle-canvas" style="position: fixed; inset: 0; pointer-events: none; z-index: 1;"></canvas>
+  <canvas id="particle-canvas" style="position: fixed; inset: 0; pointer-events: none; z-index: 0;"></canvas>
+  <div class="reg-square reg-square--left" aria-hidden="true"></div>
+  <div class="reg-square reg-square--right" aria-hidden="true"></div>
   <div id="site-nav"></div>
 
   <main>
-    <section class="section" style="padding-top: calc(var(--nav-h) + var(--space-5)); position: relative;">
-      <div class="hud-marker hud-marker--tl"></div>
-      <div class="hud-marker hud-marker--tr"></div>
-
+    <section class="section" style="padding-top: calc(var(--nav-h) + var(--space-5));" id="contenido">
       <div class="container">
         <span class="eyebrow">03 — Audiencias &amp; Formatos</span>
-        <h1 class="section-title" data-reveal>Ideas hechas para la pantalla.</h1>
-        <p class="section-lede" id="content-intro" data-reveal data-reveal-delay="80"></p>
+        <h1 class="section-title">Ideas hechas para la pantalla</h1>
+        <p class="section-lede" id="content-intro"></p>
 
         <!-- Métricas / Plataformas -->
-        <div class="section__head" style="margin-top: var(--space-5); margin-bottom: var(--space-2);">
-          <div>
-            <span class="eyebrow">Audiencia</span>
-            <h2 class="section-title" style="font-size: var(--fs-h2);">Comunidad &amp; Redes</h2>
-          </div>
-        </div>
+        <div class="stats" id="content-plataformas" style="margin-top: var(--space-4); margin-bottom: var(--space-5);"></div>
 
-        <div class="stats" id="content-plataformas"></div>
-      </div>
-    </section>
-
-    <!-- Piezas Destacadas -->
-    <section class="section section--tight">
-      <div class="container">
+        <!-- Piezas Destacadas -->
         <div class="section__head">
           <div>
-            <span class="eyebrow">Campañas</span>
-            <h2 class="section-title" style="font-size: var(--fs-h2);">Piezas de Alto Rendimiento</h2>
+            <span class="eyebrow">Piezas de Alto Rendimiento</span>
+            <h2 class="section-title" style="font-size: var(--fs-h2);">Campañas &amp; Publicaciones</h2>
           </div>
         </div>
-
         <div class="grid" id="content-piezas"></div>
       </div>
     </section>
@@ -71,11 +58,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      initParticles('particle-canvas', {
-        density: 16000,
-        maxParticles: 75,
-        colorRgb: '255, 55, 95'
-      });
+      initParticles('particle-canvas');
     });
   </script>
 </body>

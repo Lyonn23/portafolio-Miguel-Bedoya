@@ -8,7 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&family=Unbounded:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Michroma&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Syncopate:wght@400;700&family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
@@ -20,68 +20,43 @@
 </head>
 <body data-track="dev">
 
-  <canvas id="particle-canvas" style="position: fixed; inset: 0; pointer-events: none; z-index: 1;"></canvas>
+  <canvas id="particle-canvas" style="position: fixed; inset: 0; pointer-events: none; z-index: 0;"></canvas>
+  <div class="reg-square reg-square--left" aria-hidden="true"></div>
+  <div class="reg-square reg-square--right" aria-hidden="true"></div>
   <div id="site-nav"></div>
 
   <main>
-    <section class="section" style="padding-top: calc(var(--nav-h) + var(--space-5)); position: relative;">
-      <div class="hud-marker hud-marker--tl"></div>
-      <div class="hud-marker hud-marker--tr"></div>
-
+    <section class="section" style="padding-top: calc(var(--nav-h) + var(--space-5));" id="desarrollo">
       <div class="container">
         <span class="eyebrow">01 — Full-Stack &amp; Creative Dev</span>
-        <h1 class="section-title" data-reveal>Código con criterio &amp; arquitectura moderna.</h1>
-        <p class="section-lede" id="dev-intro" data-reveal data-reveal-delay="80"></p>
+        <h1 class="section-title">Código con criterio &amp; arquitectura moderna</h1>
+        <p class="section-lede" id="dev-intro"></p>
 
         <!-- Servicios -->
-        <div class="section__head" style="margin-top: var(--space-5); margin-bottom: var(--space-2);">
-          <div>
-            <span class="eyebrow">Soluciones</span>
-            <h2 class="section-title" style="font-size: var(--fs-h2);">Servicios Web</h2>
-          </div>
+        <div style="margin-top: var(--space-4); margin-bottom: 0.75rem;">
+          <span class="eyebrow" style="font-size: 11px;">Servicios Estratégicos</span>
         </div>
-
-        <div class="section-lede" style="margin-bottom: var(--space-3);" data-reveal data-reveal-delay="100">
-          Webs estratégicas para empresas y profesionales, e invitaciones digitales inolvidables para eventos especiales.
-        </div>
-
-        <ul class="chip-row" id="dev-servicios" data-reveal data-reveal-delay="120"></ul>
+        <ul class="chip-row" id="dev-servicios" style="margin-bottom: var(--space-4);"></ul>
 
         <!-- Stack Tecnológico -->
-        <div class="section__head" style="margin-top: var(--space-5); margin-bottom: var(--space-2);">
-          <div>
-            <span class="eyebrow">Tecnologías</span>
-            <h2 class="section-title" style="font-size: var(--fs-h2);">Stack &amp; Herramientas</h2>
-          </div>
+        <div style="margin-top: var(--space-3); margin-bottom: 0.75rem;">
+          <span class="eyebrow" style="font-size: 11px;">Stack &amp; Tecnologías</span>
         </div>
+        <ul class="chip-row" id="dev-stack" style="margin-bottom: var(--space-4);"></ul>
 
-        <ul class="chip-row" id="dev-stack" data-reveal data-reveal-delay="140"></ul>
-      </div>
-    </section>
-
-    <!-- Proyectos Destacados -->
-    <section class="section section--tight">
-      <div class="container">
-        <div class="section__head">
+        <!-- Proyectos Destacados -->
+        <div class="section__head" style="margin-top: var(--space-5);">
           <div>
             <span class="eyebrow">Portafolio</span>
             <h2 class="section-title" style="font-size: var(--fs-h2);">Proyectos &amp; Entregables</h2>
           </div>
         </div>
         <div class="grid" id="dev-proyectos"></div>
-      </div>
-    </section>
 
-    <!-- GitHub Card -->
-    <section class="section section--tight">
-      <div class="container">
-        <div class="section__head">
-          <div>
-            <span class="eyebrow">Open Source</span>
-            <h2 class="section-title" style="font-size: var(--fs-h2);">Actividad en GitHub</h2>
-          </div>
+        <!-- GitHub Card -->
+        <div style="margin-top: var(--space-5);">
+          <div id="github-card"></div>
         </div>
-        <div id="github-card"></div>
       </div>
     </section>
   </main>
@@ -98,11 +73,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      initParticles('particle-canvas', {
-        density: 16000,
-        maxParticles: 75,
-        colorRgb: '255, 45, 85'
-      });
+      initParticles('particle-canvas');
     });
   </script>
 </body>

@@ -1,22 +1,19 @@
 /* ============================================================================
-   PARTICLES.JS — Atmósfera de Polvo Volcánico y Embers Carmesí
-   Partículas cinematográficas con reacción al cursor y brillo orgánico
+   PARTICLES.JS — Atmósfera de Embers Volcánicos (#FF0000 & #FFFFFF)
+   Optimizado para 60fps con impacto visual inmediato
 ============================================================================ */
 
 function initParticles(canvasId, overrides = {}) {
   const CONFIG = Object.assign({
     density: 18000,
-    maxParticles: 95,
+    maxParticles: 75,
     linkDistance: 110,
-    speed: 0.28,
-    baseRadius: 1.4,
-    pulseAmplitude: 1.2,
-    colorRgb: '255, 45, 75',        // Carmesí radiante
-    accentColorRgb: '255, 255, 255', // Blanco estelar
-    lineOpacityMax: 0.12,
-    dotOpacityMax: 0.75,
-    mouseRadius: 180,
-    reactToMouse: true
+    speed: 0.35,
+    baseRadius: 1.5,
+    colorRedRgb: '255, 0, 0',       // #FF0000 Puro
+    colorWhiteRgb: '255, 255, 255', // #FFFFFF Puro
+    lineOpacityMax: 0.14,
+    mouseRadius: 160
   }, overrides);
 
   const canvas = document.getElementById(canvasId);
@@ -30,8 +27,8 @@ function initParticles(canvasId, overrides = {}) {
 
   function resize() {
     dpr = Math.min(window.devicePixelRatio || 1, 2);
-    width = canvas.parentElement ? canvas.parentElement.clientWidth : window.innerWidth;
-    height = canvas.parentElement ? canvas.parentElement.clientHeight : window.innerHeight;
+    width = window.innerWidth;
+    height = window.innerHeight;
     canvas.width = width * dpr;
     canvas.height = height * dpr;
     canvas.style.width = width + 'px';
@@ -44,16 +41,15 @@ function initParticles(canvasId, overrides = {}) {
     const count = Math.min(CONFIG.maxParticles, Math.floor((width * height) / CONFIG.density));
     particles = [];
     for (let i = 0; i < count; i++) {
-      const isAccent = Math.random() < 0.25;
+      const isRed = Math.random() < 0.65; // Mayoría rojas como el video
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
         vx: (Math.random() - 0.5) * CONFIG.speed,
-        vy: (Math.random() - 0.5) * CONFIG.speed - 0.08, // Leve deriva ascendente tipo ember
+        vy: (Math.random() - 0.5) * CONFIG.speed - 0.12, // Deriva ascendente
         size: Math.random() * CONFIG.baseRadius + 0.8,
-        isAccent: isAccent,
-        phase: Math.random() * Math.PI * 2,
-        pulseSpeed: 0.0015 + Math.random() * 0.002
+        isRed: isRed,
+        phase: Math.random() * Math.PI * 2
       });
     }
   }
@@ -66,26 +62,24 @@ function initParticles(canvasId, overrides = {}) {
       p.x += p.vx;
       p.y += p.vy;
 
-      // Wrap around screen
       if (p.x < -10) p.x = width + 10;
       if (p.x > width + 10) p.x = -10;
       if (p.y < -10) p.y = height + 10;
       if (p.y > height + 10) p.y = -10;
 
-      // Mouse gravitation & repel
-      if (CONFIG.reactToMouse && mouse.x !== null) {
+      if (mouse.x !== null) {
         const dx = p.x - mouse.x;
         const dy = p.y - mouse.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < CONFIG.mouseRadius && dist > 1) {
           const force = (CONFIG.mouseRadius - dist) / CONFIG.mouseRadius;
-          p.x += (dx / dist) * force * 0.8;
-          p.y += (dy / dist) * force * 0.8;
+          p.x += (dx / dist) * force * 1.2;
+          p.y += (dy / dist) * force * 1.2;
         }
       }
     }
 
-    // Dibujar conexiones entre partículas cercanas
+    // Líneas finas entre partículas
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const a = particles[i];
@@ -95,8 +89,8 @@ function initParticles(canvasId, overrides = {}) {
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist < CONFIG.linkDistance) {
-          const opacity = (1 - dist / CONFIG.linkDistance) * CONFIG.lineOpacityMax;
-          ctx.strokeStyle = `rgba(${CONFIG.colorRgb}, ${opacity})`;
+          const alpha = (1 - dist / CONFIG.linkDistance) * CONFIG.lineOpacityMax;
+          ctx.strokeStyle = `rgba(${CONFIG.colorRedRgb}, ${alpha})`;
           ctx.lineWidth = 0.75;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
@@ -106,20 +100,19 @@ function initParticles(canvasId, overrides = {}) {
       }
     }
 
-    // Dibujar cada partícula (Embers con halo)
+    // Dibujar partículas
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
-      const pulse = reduceMotion ? 1 : (Math.sin(t * p.pulseSpeed + p.phase) * 0.3 + 0.8);
-      const radius = p.size * pulse;
-      const rgb = p.isAccent ? CONFIG.accentColorRgb : CONFIG.colorRgb;
-      const alpha = p.isAccent ? 0.85 : 0.65;
+      const pulse = reduceMotion ? 1 : (Math.sin(t * 0.002 + p.phase) * 0.35 + 0.85);
+      const r = Math.max(p.size * pulse, 0.6);
+      const rgb = p.isRed ? CONFIG.colorRedRgb : CONFIG.colorWhiteRgb;
 
       ctx.save();
       ctx.beginPath();
-      ctx.arc(p.x, p.y, Math.max(radius, 0.5), 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${rgb}, ${alpha})`;
-      ctx.shadowColor = `rgba(${rgb}, 0.8)`;
-      ctx.shadowBlur = p.isAccent ? 8 : 12;
+      ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${rgb}, ${p.isRed ? 0.8 : 0.9})`;
+      ctx.shadowColor = `rgba(${rgb}, 0.9)`;
+      ctx.shadowBlur = p.isRed ? 10 : 6;
       ctx.fill();
       ctx.restore();
     }

@@ -8,7 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&family=Unbounded:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Michroma&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Syncopate:wght@400;700&family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
@@ -20,25 +20,24 @@
 </head>
 <body data-track="contacto">
 
-  <canvas id="particle-canvas" style="position: fixed; inset: 0; pointer-events: none; z-index: 1;"></canvas>
+  <canvas id="particle-canvas" style="position: fixed; inset: 0; pointer-events: none; z-index: 0;"></canvas>
+  <div class="reg-square reg-square--left" aria-hidden="true"></div>
+  <div class="reg-square reg-square--right" aria-hidden="true"></div>
   <div id="site-nav"></div>
 
   <main>
-    <section class="section" style="padding-top: calc(var(--nav-h) + var(--space-5)); position: relative;">
-      <div class="hud-marker hud-marker--tl"></div>
-      <div class="hud-marker hud-marker--tr"></div>
-
+    <section class="section" style="padding-top: calc(var(--nav-h) + var(--space-5));" id="contacto">
       <div class="container">
         <span class="eyebrow">05 — Conexión &amp; Proyectos</span>
-        <h1 class="section-title" data-reveal>Cuéntame tu idea.</h1>
-        <p class="section-lede" data-reveal data-reveal-delay="80">
+        <h1 class="section-title">Cuéntame tu idea</h1>
+        <p class="section-lede">
           Ya sea un sitio web estratégico, una sesión fotográfica, una campaña de contenido o
           el corte final de un video comercial — construyámoslo juntos.
         </p>
 
         <div class="contact-grid" style="margin-top: var(--space-5);">
           <!-- Formulario Glassmorphic -->
-          <form class="form" id="contact-form" data-reveal data-reveal-delay="120">
+          <form class="form" id="contact-form">
             <div class="field">
               <label for="nombre">Nombre o Empresa</label>
               <input type="text" id="nombre" name="nombre" required placeholder="¿Cómo te llamas?">
@@ -55,22 +54,21 @@
             </div>
 
             <div class="field">
-              <label for="proyecto">Disciplina o Tipo de Proyecto</label>
+              <label for="proyecto">Tipo de Proyecto</label>
               <input type="text" id="proyecto" name="proyecto" placeholder="Web, Fotografía, Contenido, Video...">
             </div>
 
             <div class="field">
               <label for="mensaje">Mensaje / Objetivos</label>
-              <textarea id="mensaje" name="mensaje" required placeholder="Cuéntame sobre tu proyecto, plazos e ideas principales..."></textarea>
+              <textarea id="mensaje" name="mensaje" required placeholder="Cuéntame sobre tu proyecto, plazos e ideas..."></textarea>
             </div>
 
-            <!-- Honeypot anti-spam -->
             <div class="field field--honeypot">
               <label for="_gotcha">No llenar</label>
               <input type="text" id="_gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
             </div>
 
-            <button type="submit" class="btn btn--solid" style="padding: 1rem 2rem; font-size: 0.95rem;">
+            <button type="submit" class="btn btn--solid" style="padding: 1rem 2rem;">
               <span>Enviar Mensaje</span>
               <span>↗</span>
             </button>
@@ -78,36 +76,32 @@
           </form>
 
           <!-- Tarjetas de Información Directa -->
-          <div class="contact-info" data-reveal data-reveal-delay="160">
-            <!-- WhatsApp Rápido -->
-            <div class="contact-info__card" style="border-color: rgba(255, 45, 75, 0.4); background: rgba(30, 4, 8, 0.8);">
-              <span class="eyebrow" style="margin-bottom: 0.75rem;">Canal Inmediato</span>
+          <div class="contact-info">
+            <div class="contact-info__card" style="border-color: var(--c-red); background: rgba(30, 2, 5, 0.85);">
+              <span class="eyebrow" style="margin-bottom: 0.6rem;">Canal Inmediato</span>
               <h3>WhatsApp Directo</h3>
-              <p style="font-size: 0.92rem; margin-bottom: 1rem;">Para consultas directas, presupuestos rápidos o agendar llamadas.</p>
-              <a id="contact-whatsapp" class="btn btn--solid" target="_blank" rel="noopener" style="font-size: 0.85rem; width: 100%;">
+              <p style="font-size: 0.92rem; margin-bottom: 1rem;">Respuesta rápida para consultas o presupuestos de proyectos.</p>
+              <a id="contact-whatsapp" class="btn btn--solid" target="_blank" rel="noopener" style="width: 100%; font-size: 13px;">
                 <span>Chatear por WhatsApp</span>
                 <span>↗</span>
               </a>
             </div>
 
-            <!-- Email -->
             <div class="contact-info__card">
-              <span class="eyebrow" style="margin-bottom: 0.75rem;">Correo Oficial</span>
+              <span class="eyebrow" style="margin-bottom: 0.6rem;">Correo Oficial</span>
               <h3>Email</h3>
               <a id="contact-email"></a>
             </div>
 
-            <!-- Ubicación -->
             <div class="contact-info__card">
-              <span class="eyebrow" style="margin-bottom: 0.75rem;">Base de Operaciones</span>
+              <span class="eyebrow" style="margin-bottom: 0.6rem;">Base</span>
               <h3>Ubicación</h3>
-              <p id="contact-location" style="font-family: var(--font-mono); font-size: 0.9rem; color: #ffffff;"></p>
+              <p id="contact-location" style="font-family: var(--font-mono); font-size: 13px; color: #FFFFFF;"></p>
             </div>
 
-            <!-- Redes Sociales -->
             <div class="contact-info__card">
-              <span class="eyebrow" style="margin-bottom: 0.75rem;">Redes Sociales</span>
-              <div id="contact-redes" class="chip-row" style="margin-top: 0.5rem;"></div>
+              <span class="eyebrow" style="margin-bottom: 0.6rem;">Redes Sociales</span>
+              <div id="contact-redes" class="chip-row" style="margin-top: 0.4rem;"></div>
             </div>
           </div>
         </div>
@@ -127,11 +121,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      initParticles('particle-canvas', {
-        density: 16000,
-        maxParticles: 75,
-        colorRgb: '255, 40, 75'
-      });
+      initParticles('particle-canvas');
     });
   </script>
 </body>

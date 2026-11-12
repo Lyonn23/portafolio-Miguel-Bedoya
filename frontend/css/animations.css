@@ -1,20 +1,27 @@
 /* ============================================================================
-   ANIMATIONS.CSS — Animaciones Cinematográficas & "Gear Reveal"
-   Inspirado en la física de movimiento del video de referencia
+   ANIMATIONS.CSS — Animaciones Gear Reveal Ultrarrápidas (<0.22s)
+   Impacto visual alto, 60fps GPU, Cero lentitud ni pantallas de espera
 ============================================================================ */
 
-/* ---- Pulso de Punto LED Carmesí ---- */
-@keyframes pulse-dot {
+/* ---- Pulso Rojo de Alta Tensión ---- */
+@keyframes pulse-red {
   0%, 100% {
-    opacity: 1;
     transform: scale(1);
-    box-shadow: 0 0 8px var(--crimson-core), 0 0 16px var(--crimson-light);
+    box-shadow: 0 0 8px var(--c-red), 0 0 16px var(--c-red);
+    opacity: 1;
   }
   50% {
-    opacity: 0.45;
     transform: scale(1.35);
-    box-shadow: 0 0 14px var(--crimson-core), 0 0 24px var(--crimson-light);
+    box-shadow: 0 0 16px var(--c-red), 0 0 28px var(--c-red);
+    opacity: 0.6;
   }
+}
+
+/* ---- Rotación Lenta de Pistas Concéntricas ---- */
+@keyframes stadium-rotate {
+  0%   { transform: rotate(0deg); }
+  50%  { transform: rotate(1.8deg); }
+  100% { transform: rotate(-1.8deg); }
 }
 
 /* ---- Parpadeo de Cursor de Escritura ---- */
@@ -23,126 +30,65 @@
   50%, 100% { opacity: 0; }
 }
 
-/* ---- Fade-Up Fluido con Escala Suave ---- */
-@keyframes fade-up-smooth {
+/* ---- Entrada Inmediata Sin Retraso Sluggish ---- */
+@keyframes reveal-fast {
   from {
     opacity: 0;
-    transform: translateY(32px) scale(0.98);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 }
 
-/* ---- Revelación Cinematográfica de la Foto ---- */
-@keyframes photo-gear-reveal {
-  0% {
-    opacity: 0;
-    transform: scale(0.92) rotate(-2deg);
-    filter: brightness(0.2) contrast(1.4) blur(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) rotate(0deg);
-    filter: brightness(1) contrast(1.08) blur(0px);
-  }
-}
-
-/* ---- Rotación & Respiración de Anillos de Estadio ---- */
-@keyframes rings-drift {
-  0% {
-    transform: rotate(0deg) scale(1);
-  }
-  50% {
-    transform: rotate(1.5deg) scale(1.02);
-  }
-  100% {
-    transform: rotate(-1.5deg) scale(0.99);
-  }
-}
-
-/* ---- Flotación Suave de Micro-Badges ---- */
-@keyframes float-badge {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-.hero__pill-tag--top-left {
-  animation: float-badge 5s ease-in-out infinite;
-}
-
-.hero__pill-tag--bottom-right {
-  animation: float-badge 6s ease-in-out 1.2s infinite;
-}
-
-.hero__pill-tag--mid-left {
-  animation: float-badge 5.5s ease-in-out 0.6s infinite;
-}
-
-/* ---- Sistema de Revelación al Scroll (data-reveal) ---- */
+/* ---- Revelación al Scroll de Alta Velocidad (Duración: 0.22s) ---- */
 [data-reveal] {
   opacity: 0;
-  transform: translateY(30px) scale(0.98);
-  transition: opacity 0.85s var(--ease-out),
-              transform 0.85s var(--ease-out);
+  transform: translateY(18px);
+  transition: opacity 0.22s var(--ease-quick),
+              transform 0.22s var(--ease-quick);
   will-change: opacity, transform;
 }
 
 [data-reveal].is-visible {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateY(0);
 }
 
-/* Stagger delay helpers */
-[data-reveal-delay="50"]  { transition-delay: 50ms; }
+/* Micro delays rápidos de máximo 60ms para no ralentizar */
+[data-reveal-delay="40"]  { transition-delay: 40ms; }
+[data-reveal-delay="60"]  { transition-delay: 60ms; }
 [data-reveal-delay="80"]  { transition-delay: 80ms; }
 [data-reveal-delay="100"] { transition-delay: 100ms; }
 [data-reveal-delay="120"] { transition-delay: 120ms; }
-[data-reveal-delay="140"] { transition-delay: 140ms; }
-[data-reveal-delay="160"] { transition-delay: 160ms; }
-[data-reveal-delay="200"] { transition-delay: 200ms; }
-[data-reveal-delay="240"] { transition-delay: 240ms; }
-[data-reveal-delay="300"] { transition-delay: 300ms; }
 
-/* ---- Entrada Inicial de la Portada ---- */
+/* Entrada rápida del Hero al cargar (<0.25s) */
 .hero__badge,
+.hero__brand-lockup,
 .hero__title,
 .hero__role-wrap,
 .hero__bio,
 .hero__meta,
 .hero__actions {
-  animation: fade-up-smooth 0.9s var(--ease-out) both;
+  animation: reveal-fast 0.25s var(--ease-quick) both;
 }
 
-.hero__badge      { animation-delay: 0.1s; }
-.hero__title      { animation-delay: 0.22s; }
-.hero__role-wrap  { animation-delay: 0.35s; }
-.hero__bio        { animation-delay: 0.48s; }
-.hero__meta       { animation-delay: 0.6s; }
-.hero__actions    { animation-delay: 0.72s; }
+.hero__badge        { animation-delay: 0.02s; }
+.hero__brand-lockup { animation-delay: 0.05s; }
+.hero__title        { animation-delay: 0.08s; }
+.hero__role-wrap    { animation-delay: 0.12s; }
+.hero__bio          { animation-delay: 0.15s; }
+.hero__meta         { animation-delay: 0.18s; }
+.hero__actions      { animation-delay: 0.22s; }
 
-.hero__visual-card {
-  animation: photo-gear-reveal 1.2s var(--ease-out) both 0.3s;
-}
-
-/* ---- Respeto por preferencias de movimiento reducido ---- */
+/* ---- Reducción de Movimiento ---- */
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
   }
-
   [data-reveal] {
     opacity: 1 !important;
     transform: none !important;

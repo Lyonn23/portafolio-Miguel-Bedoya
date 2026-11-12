@@ -8,7 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&family=Unbounded:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Michroma&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Syncopate:wght@400;700&family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
@@ -20,42 +20,28 @@
 </head>
 <body data-track="foto">
 
-  <canvas id="particle-canvas" style="position: fixed; inset: 0; pointer-events: none; z-index: 1;"></canvas>
+  <canvas id="particle-canvas" style="position: fixed; inset: 0; pointer-events: none; z-index: 0;"></canvas>
+  <div class="reg-square reg-square--left" aria-hidden="true"></div>
+  <div class="reg-square reg-square--right" aria-hidden="true"></div>
   <div id="site-nav"></div>
 
   <main>
-    <section class="section" style="padding-top: calc(var(--nav-h) + var(--space-5)); position: relative;">
-      <div class="hud-marker hud-marker--tl"></div>
-      <div class="hud-marker hud-marker--tr"></div>
-
+    <section class="section" style="padding-top: calc(var(--nav-h) + var(--space-5));" id="fotografia">
       <div class="container">
         <span class="eyebrow">02 — Óptica &amp; Dirección Visual</span>
-        <h1 class="section-title" data-reveal>Luz, encuadre, instante.</h1>
-        <p class="section-lede" id="foto-intro" data-reveal data-reveal-delay="80"></p>
+        <h1 class="section-title">Luz, encuadre, instante</h1>
+        <p class="section-lede" id="foto-intro"></p>
 
         <!-- Equipo y Óptica -->
-        <div class="section__head" style="margin-top: var(--space-4); margin-bottom: var(--space-2);">
-          <div>
-            <span class="eyebrow">Óptica &amp; Software</span>
-            <h2 class="section-title" style="font-size: var(--fs-h2);">Equipo Técnico</h2>
-          </div>
+        <div style="margin-top: var(--space-4); margin-bottom: 0.75rem;">
+          <span class="eyebrow" style="font-size: 11px;">Cámara &amp; Software</span>
         </div>
+        <ul class="chip-row" id="foto-equipo" style="margin-bottom: var(--space-4);"></ul>
 
-        <ul class="chip-row" id="foto-equipo" data-reveal data-reveal-delay="120"></ul>
-      </div>
-    </section>
-
-    <!-- Galería con Lightbox Interactivo -->
-    <section class="section section--tight">
-      <div class="container">
-        <div class="section__head">
-          <div>
-            <span class="eyebrow">Exposición</span>
-            <h2 class="section-title" style="font-size: var(--fs-h2);">Galería Seleccionada</h2>
-          </div>
-          <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--crimson-light);">[ Clic en cualquier foto para ampliar ]</span>
+        <!-- Galería con Lightbox -->
+        <div class="section__head" style="margin-top: var(--space-4);">
+          <span style="font-family: var(--font-mono); font-size: 13px; color: var(--c-red);">[ Clic en cualquier imagen para abrir en alta resolución ]</span>
         </div>
-
         <div class="gallery" id="foto-galeria"></div>
       </div>
     </section>
@@ -72,11 +58,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      initParticles('particle-canvas', {
-        density: 16000,
-        maxParticles: 75,
-        colorRgb: '255, 75, 105'
-      });
+      initParticles('particle-canvas');
     });
   </script>
 </body>

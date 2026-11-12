@@ -1,55 +1,64 @@
 /* ==========================================================================
    DESIGN TOKENS — Miguel Bedoya Portfolio
-   Inspirado en la estética "Gear Reveal" (Volcanic Obsidian / Crimson Ember)
+   Paleta y Tipografía Oficial según Especificaciones de Diseño
+   Colores: #FFFFFF (White), #000000 (Black), #FF0000 (Pure Red),
+            #B3B3B3 (Gray), #323232 (Charcoal), #2a0407 (Wine Mars Void)
+   Tipografía: Syncopate / Michroma / Unbounded (Titulares Ultra-Wide tipo CO2)
+               Akkurat Mono / JetBrains Mono (14px Monospace HUD)
+               Plus Jakarta Sans (Cuerpo & Brand acme© style)
    ========================================================================== */
 
 :root {
-  /* ---- Paleta Primaria: Obsidiana Volcánica + Carmesí Radiante ---- */
-  --bg-void:            #080102;              /* Fondo profundo casi negro con matiz rubí */
-  --bg-void-rgb:        8, 1, 2;
-  --bg-surface:         rgba(22, 3, 6, 0.72); /* Superficie de cristal ahumado rubí */
-  --bg-surface-elevated:rgba(36, 5, 11, 0.85);/* Tarjetas con elevación */
-  --bg-surface-hover:   rgba(56, 8, 18, 0.95);/* Hover de tarjetas */
-  --bg-surface-glass:   rgba(255, 255, 255, 0.03);
+  /* ---- Paleta Oficial (Directo del Brand Panel de Figma) ---- */
+  --c-white:            #FFFFFF;              /* 56 elements en Figma */
+  --c-black:            #000000;              /* 56 elements en Figma */
+  --c-stroke:           #000000;              /* Stroke oficial */
+  --c-gray:             #B3B3B3;              /* Rectangle oficial */
+  --c-red:              #FF0000;              /* Rectangle oficial - Rojo Puro Eléctrico */
+  --c-charcoal:         #323232;              /* acme oficial */
 
-  /* ---- Acentos Carmesí y Neón ---- */
-  --crimson-core:       #ff1e42;              /* Rojo carmesí principal de alta energía */
-  --crimson-light:      #ff4d6d;              /* Carmesí claro brillante */
-  --crimson-ember:      #ff758f;              /* Tonalidad suave para detalles finos */
-  --crimson-deep:       #8a061a;              /* Borgoña profundo para sombras y gradientes */
-  --crimson-glow:       rgba(255, 30, 66, 0.45);
-  --crimson-glow-soft:  rgba(255, 30, 66, 0.15);
-  --crimson-gradient:   linear-gradient(135deg, #ff1e42 0%, #a7001e 100%);
-  --crimson-radial:     radial-gradient(circle, rgba(255, 30, 66, 0.35) 0%, rgba(138, 6, 26, 0.05) 70%, transparent 100%);
+  /* ---- Atmósfera Mars / Gear Reveal del Video ---- */
+  --bg-void:            #070102;              /* Fondo negro con matriz de vino oscuro */
+  --bg-wine:            #240306;              /* Tinte Mars del fondo del video */
+  --bg-surface:         rgba(20, 2, 4, 0.78); /* Cristal ahumado */
+  --bg-surface-elevated:rgba(35, 4, 8, 0.88);
+  --bg-surface-hover:   rgba(50, 5, 12, 0.95);
+
+  /* ---- Acentos de Alta Energía ---- */
+  --red-core:           #FF0000;              /* Rojo puro de alta potencia */
+  --red-glow:           rgba(255, 0, 0, 0.55);
+  --red-glow-soft:      rgba(255, 0, 0, 0.2);
+  --red-gradient:       linear-gradient(135deg, #FF0000 0%, #b30000 100%);
 
   /* ---- Bordes de Precisión ---- */
-  --border-hair:        rgba(255, 255, 255, 0.08);
-  --border-hair-lit:    rgba(255, 45, 75, 0.35);
-  --border-crimson:     rgba(255, 45, 75, 0.22);
-  --border-crimson-lit: rgba(255, 75, 105, 0.65);
+  --border-subtle:      rgba(255, 255, 255, 0.1);
+  --border-white-lit:   rgba(255, 255, 255, 0.35);
+  --border-red:         rgba(255, 0, 0, 0.4);
+  --border-red-lit:     rgba(255, 0, 0, 0.85);
 
-  /* ---- Blanco Neón & Metálicos ---- */
-  --neon:               #ffffff;              /* Blanco neón puro */
-  --neon-soft:          rgba(255, 255, 255, 0.78);
-  --text-hi:            #ffffff;              /* Texto principal brillante */
-  --text-mid:           #c3b6ba;              /* Texto secundario de alta legibilidad */
-  --text-low:           #7e6f74;              /* Captions y micro-textos técnicos */
-  --text-crimson:       #ff3355;
+  /* ---- Textos ---- */
+  --text-hi:            #FFFFFF;              /* Blanco puro */
+  --text-mid:           #B3B3B3;              /* Gris oficial del panel */
+  --text-low:           #706669;              /* Subtítulos terciarios */
+  --text-dark:          #323232;              /* Carbón acme */
+  --text-red:           #FF0000;              /* Rojo puro */
 
-  /* ---- Tipografía Futurista & Editorial ---- */
-  --font-display:       'Syne', 'Unbounded', sans-serif;
-  --font-heading:       'Unbounded', 'Syne', sans-serif;
-  --font-body:          'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
-  --font-mono:          'JetBrains Mono', 'Courier New', monospace;
+  /* ---- Tipografía Exacta ---- */
+  --font-wide:          'Syncopate', 'Michroma', 'Unbounded', sans-serif; /* CO2 Ultra-Wide */
+  --font-display:       'Unbounded', 'Syncopate', sans-serif;
+  --font-mono:          'JetBrains Mono', 'Space Mono', 'Courier New', monospace; /* Akkurat Mono 14px */
+  --font-body:          'Plus Jakarta Sans', -apple-system, sans-serif;           /* acme style */
 
   /* ---- Escala Tipográfica Fluida ---- */
-  --fs-hero:            clamp(2.8rem, 7.5vw, 6.8rem);
-  --fs-h1:              clamp(2.2rem, 5vw, 4rem);
-  --fs-h2:              clamp(1.6rem, 3.2vw, 2.4rem);
-  --fs-h3:              clamp(1.2rem, 2.2vw, 1.6rem);
-  --fs-body:            1.02rem;
-  --fs-small:           0.88rem;
-  --fs-tag:             0.74rem;
+  --fs-hero:            clamp(2.4rem, 6.5vw, 5.8rem);
+  --fs-mega:            clamp(3.5rem, 11vw, 9.5rem); /* Para títulos CO2 / MB gigantes */
+  --fs-h1:              clamp(2rem, 4.5vw, 3.6rem);
+  --fs-h2:              clamp(1.5rem, 3vw, 2.2rem);
+  --fs-h3:              clamp(1.15rem, 2vw, 1.5rem);
+  --fs-body:            1rem;
+  --fs-small:           0.875rem;
+  --fs-mono:            14px;                 /* Akkurat Mono oficial: 14px */
+  --fs-tag:             0.75rem;
 
   /* ---- Espaciado ---- */
   --space-1:            0.5rem;
@@ -57,44 +66,30 @@
   --space-3:            1.5rem;
   --space-4:            2.5rem;
   --space-5:            4rem;
-  --space-6:            6.5rem;
-  --space-7:            9.5rem;
+  --space-6:            6rem;
+  --space-7:            9rem;
 
   /* ---- Geometría Orgánica / No Cuadrada ---- */
-  --radius-xs:          8px;
-  --radius-sm:          14px;
-  --radius-md:          22px;
+  --radius-sm:          12px;
+  --radius-md:          20px;
   --radius-lg:          32px;
-  --radius-xl:          42px;
+  --radius-xl:          44px;
   --radius-pill:        9999px;
-  --radius:             var(--radius-md);     /* Reemplazo global del antiguo 4px cuadrado */
 
-  /* ---- Layout & Nav ---- */
+  /* ---- Layout ---- */
   --max-w:              1280px;
-  --nav-h:              80px;
+  --nav-h:              76px;
 
   /* ---- Sombras & Resplandores ---- */
-  --shadow-sm:          0 4px 14px rgba(0, 0, 0, 0.4);
-  --shadow-card:        0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 30, 66, 0.08);
-  --shadow-card-hover:  0 28px 65px rgba(0, 0, 0, 0.8), 0 0 45px rgba(255, 30, 66, 0.22);
-  --glow-crimson-sm:    0 0 16px rgba(255, 30, 66, 0.4);
-  --glow-crimson-lg:    0 0 48px rgba(255, 30, 66, 0.32);
+  --glow-red:           0 0 25px rgba(255, 0, 0, 0.6);
+  --glow-red-lg:        0 0 60px rgba(255, 0, 0, 0.45);
+  --shadow-card:        0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 0, 0, 0.1);
+  --shadow-card-hover:  0 30px 70px rgba(0, 0, 0, 0.95), 0 0 45px rgba(255, 0, 0, 0.3);
 
-  /* ---- Curvas de Movimiento de Alta Precisión ---- */
-  --ease-out:           cubic-bezier(0.16, 1, 0.3, 1);
+  /* ---- Curvas de Velocidad Extrema (<= 0.25s) ---- */
+  --ease-quick:         cubic-bezier(0.16, 1, 0.3, 1);
   --ease-elastic:       cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-in-out:        cubic-bezier(0.65, 0, 0.35, 1);
-  --dur-fast:           0.22s;
-  --dur-med:            0.45s;
-  --dur-slow:           0.85s;
+  --dur-instant:        0.15s;
+  --dur-fast:           0.22s;                /* Máximo 0.22s para cumplir <0.3s */
+  --dur-med:            0.3s;
 }
-
-/* ==========================================================================
-   TINTES SUTILES POR DISCIPLINA (Siempre bajo la atmósfera Volcánica)
-   ========================================================================== */
-body[data-track="home"]    { --track-glow: rgba(255, 30, 66, 0.35); }
-body[data-track="dev"]     { --track-glow: rgba(255, 45, 85, 0.4); }
-body[data-track="foto"]    { --track-glow: rgba(255, 75, 105, 0.4); }
-body[data-track="content"] { --track-glow: rgba(255, 55, 95, 0.4); }
-body[data-track="video"]   { --track-glow: rgba(230, 15, 50, 0.45); }
-body[data-track="contacto"]{ --track-glow: rgba(255, 40, 75, 0.4); }

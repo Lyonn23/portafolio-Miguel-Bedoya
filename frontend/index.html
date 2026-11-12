@@ -6,10 +6,10 @@
   <title>Miguel Bedoya — Creative Suite // Code · Photo · Content · Video</title>
   <meta name="description" content="Portafolio multidisciplinario de Miguel Bedoya: Desarrollo web, fotografía, creación de contenido y edición de video cinemática.">
 
-  <!-- Tipografía Premium: Syne (Headings de impacto), Unbounded (Display futurista), Plus Jakarta Sans (Lectura clara), JetBrains Mono (HUD) -->
+  <!-- Tipografía Oficial: Syncopate / Michroma (Wide CO2), Akkurat Mono (JetBrains Mono 14px), Plus Jakarta Sans (acme style) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&family=Unbounded:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Michroma&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Syncopate:wght@400;700&family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
@@ -21,149 +21,326 @@
 </head>
 <body data-track="home">
 
-  <!-- Canvas de partículas / embers volcánicos -->
-  <canvas id="particle-canvas" style="position: fixed; inset: 0; pointer-events: none; z-index: 1;"></canvas>
+  <!-- Canvas de partículas y embers volcánicos (#FF0000 & #FFFFFF) -->
+  <canvas id="particle-canvas" style="position: fixed; inset: 0; pointer-events: none; z-index: 0;"></canvas>
 
-  <!-- Navegación Flotante -->
+  <!-- Marcadores de Calibración Cuadrados Laterales (Imágenes 3 y 4 de Figma) -->
+  <div class="reg-square reg-square--left" aria-hidden="true"></div>
+  <div class="reg-square reg-square--right" aria-hidden="true"></div>
+
+  <!-- Navegación Flotante Omnidireccional Instantánea -->
   <div id="site-nav"></div>
 
   <main>
-    <!-- HERO SECTION — "GEAR REVEAL" -->
-    <section class="hero container">
-      <!-- HUD Registration Markers (Video aesthetic) -->
-      <div class="hud-marker hud-marker--tl"></div>
-      <div class="hud-marker hud-marker--tr"></div>
-      <div class="hud-marker hud-marker--bl"></div>
-      <div class="hud-marker hud-marker--br"></div>
-
-      <!-- Concentric Stadium Rings (Motivo icónico del video) -->
-      <div class="stadium-bg" aria-hidden="true">
-        <svg viewBox="0 0 600 750" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Anillos concéntricos tipo pista de carreras / estadio -->
-          <rect class="stadium-ring" x="240" y="315" width="120" height="120" rx="60" />
-          <rect class="stadium-ring" x="200" y="275" width="200" height="200" rx="100" />
-          <rect class="stadium-ring stadium-ring--core" x="160" y="225" width="280" height="300" rx="140" />
-          <rect class="stadium-ring" x="120" y="175" width="360" height="400" rx="180" />
-          <rect class="stadium-ring" x="80" y="125" width="440" height="500" rx="220" />
-          <rect class="stadium-ring" x="40" y="75" width="520" height="600" rx="260" />
-          <rect class="stadium-ring" x="10" y="25" width="580" height="700" rx="290" />
+    <!-- ===================================================================
+         SECCIÓN 00: INICIO (HERO GEAR REVEAL STAGE)
+         =================================================================== -->
+    <section class="hero container" id="inicio">
+      <!-- Anillos Concéntricos de Estadio en Movimiento Continuo (SVG Central) -->
+      <div class="stadium-stage" aria-hidden="true">
+        <svg viewBox="0 0 700 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect class="stadium-contour" x="280" y="380" width="140" height="140" rx="70" />
+          <rect class="stadium-contour" x="230" y="330" width="240" height="240" rx="120" />
+          <rect class="stadium-contour stadium-contour--core" x="180" y="270" width="340" height="360" rx="170" />
+          <rect class="stadium-contour" x="130" y="210" width="440" height="480" rx="220" />
+          <rect class="stadium-contour" x="80" y="150" width="540" height="600" rx="270" />
+          <rect class="stadium-contour" x="30" y="90" width="640" height="720" rx="320" />
+          <rect class="stadium-contour" x="5" y="30" width="690" height="840" rx="345" />
         </svg>
       </div>
 
+      <!-- Mega Título Ultra-Wide de Fondo (Estilo "CO2" de Syncopate) -->
+      <div class="hero__mega-title" aria-hidden="true">
+        <span>MB</span>
+      </div>
+
+      <!-- Foto de Miguel (Sujeto Central/Lateral Flotante con Máscara Orgánica) -->
+      <div class="hero__portrait-stage">
+        <div class="hero__portrait-glow" aria-hidden="true"></div>
+        <img src="assets/perfil.jpg" alt="Miguel Bedoya — Creador Audiovisual & Desarrollador Web" class="hero__portrait-img" id="hero-photo">
+      </div>
+
+      <!-- Información Principal del Hero -->
       <div class="hero__inner">
-        <!-- Columna Izquierda: Información & Titular -->
         <div class="hero__content">
+          <!-- Badge de Disponibilidad con LED Pulsante -->
           <div class="hero__badge" id="availability-badge">
             <span class="dot"></span> Disponible para proyectos 2026
           </div>
 
+          <!-- Brand Lockup estilo acme© con caja técnica Akkurat Mono -->
+          <div class="hero__brand-lockup">
+            <span class="hero__acme-brand">miguel bedoya<sup>©</sup></span>
+            <div class="hero__engineered-box">
+              [ 2026 ] CREATIVE SUITE<br>&amp; FULL-STACK IN COLOMBIA
+            </div>
+          </div>
+
+          <!-- Titular Monumental -->
           <h1 class="hero__title">
             Diseño, construyo<br>
-            <span class="hero__title-accent">&amp; cuento historias.</span>
+            <span class="highlight">&amp; cuento historias.</span>
           </h1>
 
+          <!-- Rotador Mecatrónico de Roles -->
           <div class="hero__role-wrap">
             <span id="role-typer"></span><span class="cursor"></span>
           </div>
 
+          <!-- Bio -->
           <p class="hero__bio" id="hero-bio"></p>
 
+          <!-- Metadatos HUD -->
           <div class="hero__meta" id="hero-location"></div>
 
+          <!-- Botones de Acción Inmediata -->
           <div class="hero__actions">
-            <a href="contacto.html" class="btn btn--solid">Iniciar Proyecto ↗</a>
+            <a href="#contacto" data-nav-target="contacto" class="btn btn--solid">Iniciar Proyecto ↗</a>
             <a href="assets/Miguel Bedoya CV..pdf.pdf" class="btn" target="_blank" rel="noopener" download>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
               Descargar CV
             </a>
-            <a href="#tracks" class="btn btn--ghost">Explorar Trabajo ↓</a>
-          </div>
-        </div>
-
-        <!-- Columna Derecha: Hero Showcase 3D con Foto de Miguel -->
-        <div class="hero__visual-container">
-          <div class="hero__visual-card">
-            <!-- Halo Trasero de Luz Volcánica -->
-            <div class="hero__halo"></div>
-
-            <!-- Floating Micro-Badges alrededor de la foto -->
-            <div class="hero__pill-tag hero__pill-tag--top-left">
-              <span class="tag-indicator"></span>
-              <span>DEV // FULL-STACK</span>
-            </div>
-
-            <div class="hero__pill-tag hero__pill-tag--mid-left">
-              <span class="tag-indicator"></span>
-              <span>CANON EOS T7 · 55MM</span>
-            </div>
-
-            <div class="hero__pill-tag hero__pill-tag--bottom-right">
-              <span class="tag-indicator"></span>
-              <span>+29K VIEWS VIRAL</span>
-            </div>
-
-            <!-- Envoltorio de la foto con corte orgánico curvado -->
-            <div class="hero__photo-wrapper">
-              <img src="assets/perfil.jpg" alt="Miguel Bedoya — Desarrollador y Creador Audiovisual" class="hero__photo" id="hero-photo">
-            </div>
+            <a href="#desarrollo" data-nav-target="desarrollo" class="btn btn--ghost">Explorar Disciplinas ↓</a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- SELECTOR DE DISCIPLINAS (CÁPSULAS INTERACTIVAS) -->
-    <section class="section" id="tracks">
+    <section class="section section--tight" style="padding-top: 0;">
       <div class="container">
-        <div class="section__head">
-          <div>
-            <span class="eyebrow">Creative Suite // 4 Disciplinas</span>
-            <h2 class="section-title">Elige por dónde empezar</h2>
-          </div>
-          <p class="section-lede" style="margin-top: 0;">
-            Cada disciplina complementa a la otra para entregar proyectos visuales y técnicos sin fisuras.
-          </p>
-        </div>
-
         <div class="tracks" id="home-tracks"></div>
       </div>
     </section>
 
-    <!-- VISTA PREVIA DESTACADA (HIGHLIGHTS EN VIVO) -->
-    <section class="section section--tight" id="highlights-section">
+    <!-- ===================================================================
+         SECCIÓN 01: DESARROLLO WEB
+         =================================================================== -->
+    <section class="section" id="desarrollo">
       <div class="container">
         <div class="section__head">
           <div>
-            <span class="eyebrow">Highlights // Muestra Directa</span>
-            <h2 class="section-title">Producción Seleccionada</h2>
+            <span class="eyebrow">01 — Full-Stack &amp; Creative Dev</span>
+            <h2 class="section-title">Código con criterio &amp; arquitectura moderna</h2>
           </div>
-          <p class="section-lede" style="margin-top: 0;">
-            Un vistazo inmediato a piezas de video, fotografía y métricas de impacto sin salir del inicio.
+          <p class="section-lede" id="dev-intro"></p>
+        </div>
+
+        <!-- Servicios -->
+        <div style="margin-top: var(--space-4); margin-bottom: 0.75rem;">
+          <span class="eyebrow" style="font-size: 11px;">Servicios Estratégicos</span>
+        </div>
+        <ul class="chip-row" id="dev-servicios" style="margin-bottom: var(--space-4);"></ul>
+
+        <!-- Stack Tecnológico -->
+        <div style="margin-top: var(--space-3); margin-bottom: 0.75rem;">
+          <span class="eyebrow" style="font-size: 11px;">Stack &amp; Tecnologías</span>
+        </div>
+        <ul class="chip-row" id="dev-stack" style="margin-bottom: var(--space-4);"></ul>
+
+        <!-- Proyectos Web -->
+        <div class="section__head" style="margin-top: var(--space-5);">
+          <div>
+            <span class="eyebrow">Proyectos Web</span>
+            <h3 class="section-title" style="font-size: var(--fs-h2);">Entregables &amp; Experiencias</h3>
+          </div>
+        </div>
+        <div class="grid" id="dev-proyectos"></div>
+
+        <!-- Tarjeta de GitHub -->
+        <div style="margin-top: var(--space-5);">
+          <div id="github-card"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         SECCIÓN 02: FOTOGRAFÍA
+         =================================================================== -->
+    <section class="section" id="fotografia">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <span class="eyebrow">02 — Óptica &amp; Dirección Visual</span>
+            <h2 class="section-title">Luz, encuadre, instante</h2>
+          </div>
+          <p class="section-lede" id="foto-intro"></p>
+        </div>
+
+        <!-- Equipo Técnico -->
+        <div style="margin-top: var(--space-3); margin-bottom: 0.75rem;">
+          <span class="eyebrow" style="font-size: 11px;">Cámara &amp; Software</span>
+        </div>
+        <ul class="chip-row" id="foto-equipo" style="margin-bottom: var(--space-4);"></ul>
+
+        <!-- Galería Fotográfica con Lightbox -->
+        <div class="section__head" style="margin-top: var(--space-4);">
+          <span style="font-family: var(--font-mono); font-size: 13px; color: var(--c-red);">[ Clic en cualquier imagen para abrir en alta resolución ]</span>
+        </div>
+        <div class="gallery" id="foto-galeria"></div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         SECCIÓN 03: CREACIÓN DE CONTENIDO
+         =================================================================== -->
+    <section class="section" id="contenido">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <span class="eyebrow">03 — Audiencias &amp; Formatos</span>
+            <h2 class="section-title">Ideas hechas para la pantalla</h2>
+          </div>
+          <p class="section-lede" id="content-intro"></p>
+        </div>
+
+        <!-- Estadísticas de Redes -->
+        <div class="stats" id="content-plataformas" style="margin-top: var(--space-4); margin-bottom: var(--space-5);"></div>
+
+        <!-- Piezas Destacadas -->
+        <div class="section__head">
+          <div>
+            <span class="eyebrow">Piezas de Alto Rendimiento</span>
+            <h3 class="section-title" style="font-size: var(--fs-h2);">Campañas &amp; Publicaciones</h3>
+          </div>
+        </div>
+        <div class="grid" id="content-piezas"></div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         SECCIÓN 04: EDICIÓN DE VIDEO
+         =================================================================== -->
+    <section class="section" id="video">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <span class="eyebrow">04 — Post-Producción &amp; Montaje</span>
+            <h2 class="section-title">Ritmo, corte, color</h2>
+          </div>
+          <p class="section-lede" id="video-intro"></p>
+        </div>
+
+        <!-- Herramientas de Edición -->
+        <div style="margin-top: var(--space-3); margin-bottom: 0.75rem;">
+          <span class="eyebrow" style="font-size: 11px;">Suite de Edición</span>
+        </div>
+        <ul class="chip-row" id="video-herramientas" style="margin-bottom: var(--space-4);"></ul>
+
+        <!-- Reproductores de Video Reales -->
+        <div class="grid" id="video-proyectos"></div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         SECCIÓN 05: CONTACTO
+         =================================================================== -->
+    <section class="section" id="contacto">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <span class="eyebrow">05 — Conexión &amp; Proyectos</span>
+            <h2 class="section-title">Cuéntame tu idea</h2>
+          </div>
+          <p class="section-lede">
+            Ya sea un sitio web estratégico, una sesión fotográfica, una campaña de contenido o
+            el corte final de un video comercial — construyámoslo juntos.
           </p>
         </div>
 
-        <div id="home-highlights"></div>
+        <div class="contact-grid" style="margin-top: var(--space-4);">
+          <!-- Formulario Glassmorphic -->
+          <form class="form" id="contact-form">
+            <div class="field">
+              <label for="nombre">Nombre o Empresa</label>
+              <input type="text" id="nombre" name="nombre" required placeholder="¿Cómo te llamas?">
+            </div>
+
+            <div class="field">
+              <label for="email">Correo Electrónico</label>
+              <input type="email" id="email" name="email" required placeholder="tu@email.com">
+            </div>
+
+            <div class="field">
+              <label for="whatsapp">WhatsApp / Teléfono</label>
+              <input type="tel" id="whatsapp" name="whatsapp" placeholder="+57 310 000 0000">
+            </div>
+
+            <div class="field">
+              <label for="proyecto">Tipo de Proyecto</label>
+              <input type="text" id="proyecto" name="proyecto" placeholder="Web, Fotografía, Contenido, Video...">
+            </div>
+
+            <div class="field">
+              <label for="mensaje">Mensaje / Objetivos</label>
+              <textarea id="mensaje" name="mensaje" required placeholder="Cuéntame sobre tu proyecto, plazos e ideas..."></textarea>
+            </div>
+
+            <div class="field field--honeypot">
+              <label for="_gotcha">No llenar</label>
+              <input type="text" id="_gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
+            </div>
+
+            <button type="submit" class="btn btn--solid" style="padding: 1rem 2rem;">
+              <span>Enviar Mensaje</span>
+              <span>↗</span>
+            </button>
+            <p class="form-status" id="form-status"></p>
+          </form>
+
+          <!-- Tarjetas de Información Directa -->
+          <div class="contact-info">
+            <!-- WhatsApp Inmediato -->
+            <div class="contact-info__card" style="border-color: var(--c-red); background: rgba(30, 2, 5, 0.85);">
+              <span class="eyebrow" style="margin-bottom: 0.6rem;">Canal Inmediato</span>
+              <h3>WhatsApp Directo</h3>
+              <p style="font-size: 0.92rem; margin-bottom: 1rem;">Respuesta rápida para consultas o presupuestos de proyectos.</p>
+              <a id="contact-whatsapp" class="btn btn--solid" target="_blank" rel="noopener" style="width: 100%; font-size: 13px;">
+                <span>Chatear por WhatsApp</span>
+                <span>↗</span>
+              </a>
+            </div>
+
+            <!-- Email -->
+            <div class="contact-info__card">
+              <span class="eyebrow" style="margin-bottom: 0.6rem;">Correo Oficial</span>
+              <h3>Email</h3>
+              <a id="contact-email"></a>
+            </div>
+
+            <!-- Ubicación -->
+            <div class="contact-info__card">
+              <span class="eyebrow" style="margin-bottom: 0.6rem;">Base</span>
+              <h3>Ubicación</h3>
+              <p id="contact-location" style="font-family: var(--font-mono); font-size: 13px; color: #FFFFFF;"></p>
+            </div>
+
+            <!-- Redes -->
+            <div class="contact-info__card">
+              <span class="eyebrow" style="margin-bottom: 0.6rem;">Redes Sociales</span>
+              <div id="contact-redes" class="chip-row" style="margin-top: 0.4rem;"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
   <div id="site-footer"></div>
 
-  <!-- Scripts -->
+  <!-- Scripts Ultrarrápidos -->
   <script src="js/data.js" defer></script>
   <script src="js/components.js" defer></script>
   <script src="js/particles.js" defer></script>
   <script src="js/render.js" defer></script>
+  <script src="js/github.js" defer></script>
+  <script src="js/form.js" defer></script>
   <script src="js/main.js" defer></script>
   <script src="js/antiinspect.js" defer></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      initParticles('particle-canvas', {
-        density: 16000,
-        maxParticles: 80,
-        colorRgb: '255, 30, 66',
-        speed: 0.22
-      });
+      initParticles('particle-canvas');
     });
   </script>
 </body>
