@@ -138,7 +138,7 @@ async function enviarEmailNotificacion(entry) {
     timeStyle: 'short'
   });
 
-  const subject = `📩 Nueva solicitud de contacto — ${entry.nombre}`;
+  const subject = `Propuesta de proyecto — ${entry.nombre} (${proyecto})`;
   const proyecto = entry.proyecto || '(no especificado)';
   const whatsapp = entry.whatsapp || '(no especificado)';
   const mensajeHtml = escapeHtml(String(entry.mensaje)).replace(/\n/g, '<br>');

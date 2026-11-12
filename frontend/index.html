@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Miguel Bedoya — Creative Suite // Code · Photo · Content · Video</title>
+  <title>Miguel Bedoya — Portafolio</title>
   <meta name="description" content="Portafolio multidisciplinario de Miguel Bedoya: Desarrollo web, fotografía, creación de contenido y edición de video cinemática.">
 
   <!-- Tipografía Oficial: Syncopate / Michroma (Wide CO2), Akkurat Mono (JetBrains Mono 14px), Plus Jakarta Sans (acme style) -->
@@ -21,7 +21,7 @@
 </head>
 <body data-track="home">
 
-  <!-- Canvas de partículas y embers volcánicos (#FF0000 & #FFFFFF) -->
+  <!-- Canvas de Shader Dithering & Ondas Topográficas Procedurales -->
   <canvas id="particle-canvas" style="position: fixed; inset: 0; pointer-events: none; z-index: 0;"></canvas>
 
   <!-- Marcadores de Calibración Cuadrados Laterales (Imágenes 3 y 4 de Figma) -->
@@ -76,28 +76,12 @@
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
               Descargar CV
             </a>
-            <a href="#desarrollo" data-nav-target="desarrollo" class="btn btn--ghost">Explorar Disciplinas ↓</a>
+            <a href="#desarrollo" data-nav-target="desarrollo" class="btn">Explorar Disciplinas ↓</a>
           </div>
         </div>
 
         <!-- Columna Derecha: Escenario Visual Limpio & Foto Integrada a la Derecha -->
         <div class="hero__stage-right">
-          <!-- Anillos Concéntricos de Estadio en el Escenario Derecho -->
-          <div class="stadium-stage" aria-hidden="true">
-            <svg viewBox="0 0 700 900" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect class="stadium-contour" x="280" y="380" width="140" height="140" rx="70" />
-              <rect class="stadium-contour" x="230" y="330" width="240" height="240" rx="120" />
-              <rect class="stadium-contour stadium-contour--core" x="180" y="270" width="340" height="360" rx="170" />
-              <rect class="stadium-contour" x="130" y="210" width="440" height="480" rx="220" />
-              <rect class="stadium-contour" x="80" y="150" width="540" height="600" rx="270" />
-              <rect class="stadium-contour" x="30" y="90" width="640" height="720" rx="320" />
-              <rect class="stadium-contour" x="5" y="30" width="690" height="840" rx="345" />
-            </svg>
-          </div>
-
-          <!-- Marca de Agua "MB" Sutil de Fondo en el Escenario Derecho -->
-          <div class="hero__stage-watermark" aria-hidden="true">MB</div>
-
           <!-- Micro-etiquetas flotantes HUD -->
           <div class="hero__stage-tag hero__stage-tag--top">[ 04°32'N 75°40'W ]</div>
           <div class="hero__stage-tag hero__stage-tag--bottom">SYS.01 // FULL-STACK</div>
@@ -105,7 +89,7 @@
           <!-- Foto de Miguel Integrada a la Derecha con Máscara Suave -->
           <div class="hero__portrait-stage">
             <div class="hero__portrait-glow" aria-hidden="true"></div>
-            <img src="assets/perfil.jpg" alt="Miguel Bedoya — Creador Audiovisual & Desarrollador Web" class="hero__portrait-img" id="hero-photo">
+            <img src="assets/perfil.png" alt="Miguel Bedoya — Creador Audiovisual & Desarrollador Web" class="hero__portrait-img" id="hero-photo">
           </div>
         </div>
       </div>
@@ -178,9 +162,10 @@
         </div>
         <ul class="chip-row" id="foto-equipo" style="margin-bottom: var(--space-4);"></ul>
 
-        <!-- Galería Fotográfica con Lightbox -->
-        <div class="section__head" style="margin-top: var(--space-4);">
-          <span style="font-family: var(--font-mono); font-size: 13px; color: var(--c-red);">[ Clic en cualquier imagen para abrir en alta resolución ]</span>
+        <!-- Galería Fotográfica con Filtros y Lightbox -->
+        <div class="section__head" style="margin-top: var(--space-4); margin-bottom: var(--space-3);">
+          <div class="chip-row" id="foto-filtros"></div>
+          <span style="font-family: var(--font-mono); font-size: 13px; color: var(--text-mid);">[ Clic en cualquier imagen para abrir en alta resolución ]</span>
         </div>
         <div class="gallery" id="foto-galeria"></div>
       </div>
@@ -199,17 +184,8 @@
           <p class="section-lede" id="content-intro"></p>
         </div>
 
-        <!-- Estadísticas de Redes -->
-        <div class="stats" id="content-plataformas" style="margin-top: var(--space-4); margin-bottom: var(--space-5);"></div>
-
-        <!-- Piezas Destacadas -->
-        <div class="section__head">
-          <div>
-            <span class="eyebrow">Piezas de Alto Rendimiento</span>
-            <h3 class="section-title" style="font-size: var(--fs-h2);">Campañas &amp; Publicaciones</h3>
-          </div>
-        </div>
-        <div class="grid" id="content-piezas"></div>
+        <!-- Hub de Canales & Redes Oficiales -->
+        <div id="content-plataformas"></div>
       </div>
     </section>
 
@@ -255,7 +231,13 @@
 
         <div class="contact-grid" style="margin-top: var(--space-4);">
           <!-- Formulario Glassmorphic -->
-          <form class="form" id="contact-form">
+          <form class="form" id="contact-form" action="https://formsubmit.co/beleonnm@gmail.com" method="POST">
+            <!-- Parámetros FormSubmit -->
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_subject" id="form-subject" value="Propuesta de proyecto">
+            <input type="hidden" name="_next" id="form-next" value="">
+
             <div class="field">
               <label for="nombre">Nombre o Empresa</label>
               <input type="text" id="nombre" name="nombre" required placeholder="¿Cómo te llamas?">
@@ -296,13 +278,13 @@
           <!-- Tarjetas de Información Directa -->
           <div class="contact-info">
             <!-- WhatsApp Inmediato -->
-            <div class="contact-info__card" style="border-color: var(--c-red); background: rgba(30, 2, 5, 0.85);">
+            <div class="contact-info__card" style="border-color: rgba(255, 255, 255, 0.18); background: rgba(22, 22, 28, 0.85);">
               <span class="eyebrow" style="margin-bottom: 0.6rem;">Canal Inmediato</span>
               <h3>WhatsApp Directo</h3>
               <p style="font-size: 0.92rem; margin-bottom: 1rem;">Respuesta rápida para consultas o presupuestos de proyectos.</p>
-              <a id="contact-whatsapp" class="btn btn--solid" target="_blank" rel="noopener" style="width: 100%; font-size: 13px;">
-                <span>Chatear por WhatsApp</span>
-                <span>↗</span>
+              <a id="contact-whatsapp" class="btn btn--solid" target="_blank" rel="noopener" style="width: 100%; font-size: 13px; color: #000000 !important;">
+                <span style="color: #000000 !important; font-weight: 700;">Chatear por WhatsApp</span>
+                <span style="color: #000000 !important; font-weight: 700;">↗</span>
               </a>
             </div>
 

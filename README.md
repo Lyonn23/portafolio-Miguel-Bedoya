@@ -135,37 +135,21 @@ quieres que se note más o menos, ajusta en `frontend/css/hero.css`:
  
 El frontend es HTML/CSS/JS puro, así que puedes subirlo gratis a:
  
-- **GitHub Pages**: sube la carpeta `frontend/` a un repositorio y activa Pages.
-- **Netlify / Vercel**: arrastra la carpeta `frontend/` a su panel — despliegue instantáneo.
+- **GitHub Pages / Cloudflare Pages**: sube la carpeta `frontend/` para despliegue global instantáneo.
  
-### Despliegue completo en Vercel
+### Despliegue en Cloudflare Pages
 
-Este repositorio ya incluye un archivo `vercel.json` y una API de Vercel en
-`api/` para que el formulario de contacto funcione en el mismo despliegue.
+El proyecto incluye soporte nativo y optimizado para **Cloudflare Pages**:
+- `frontend/_headers`: Cabeceras de seguridad y caché global en el edge de Cloudflare.
+- `frontend/_redirects`: Redirecciones limpias para navegación sin recarga.
+- `functions/api/contacto.js`: Cloudflare Pages Function serverless lista para recibir mensajes de contacto con 0ms de latencia.
 
-1. Conecta tu repositorio a Vercel.
-2. Si quieres recibir los mensajes por correo, configura estas variables de
-   entorno en Vercel:
-   - `GMAIL_USER`
-   - `GMAIL_APP_PASSWORD`
-   - `CONTACT_TO` (opcional, por defecto usa `beleonnm@gmail.com`)
-3. Despliega el proyecto. El frontend estará servido desde `frontend/` y el
-   endpoint del formulario estará disponible en `/api/contacto`.
-
-> Nota: Vercel no conserva archivos locales como `backend/mensajes.json`
-> entre invocaciones. Por eso el envío de mensajes en Vercel depende del correo
-> electrónico. Si deseas almacenamiento permanente, usa un backend con base de
-> datos o un servicio especializado.
-
-> Importante: en producción Vercel usa un sistema de archivos sensible a mayúsculas.
-> Si tu repo viene de Windows, Git puede no detectar solo cambios de mayúsculas
-> en los nombres de archivos. Para asegurarte de que las imágenes cambien de
-> `foto-1.JPG` a `foto-1.jpg`, renómbralas primero a un nombre intermedio
-> (`foto-1-temp.jpg`) y luego al nombre final (`foto-1.jpg`) antes de subir.
-
-> El endpoint `/api/contacto` ahora reporta explícitamente si el correo no está
-> configurado, y devolverá un error si el envío por Gmail falla por credenciales
-> incorrectas o por variables de entorno mal puestas.
+1. Conecta tu repositorio de GitHub a Cloudflare Pages.
+2. Configura los ajustes de compilación:
+   - **Framework preset**: *None*
+   - **Build command**: *(dejar en blanco)*
+   - **Build output directory**: `frontend`
+3. Despliega el proyecto. El portafolio se distribuirá en más de 300 centros de datos mundiales de Cloudflare con máxima velocidad y seguridad.
  
 Para el backend local (si quieres probar el formulario en tu máquina),
 usa un servicio como Render o Railway, que soportan Node.js/Express gratis

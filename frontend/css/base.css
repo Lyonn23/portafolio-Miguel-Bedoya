@@ -1,7 +1,6 @@
 /* ============================================================================
-   BASE.CSS — Gear Reveal Foundation
-   Colores Oficiales: #FFFFFF, #000000, #FF0000, #B3B3B3, #323232, #240306
-   Tipografía: Syncopate / Michroma (Wide), Akkurat Mono (14px), Plus Jakarta Sans
+   BASE.CSS — Dark Monochromatic Foundation (Sin Rojo)
+   Lujo minimalista, Alto contraste (#000000 & #FFFFFF), Estilo Dithering Shader
 ============================================================================ */
 
 *, *::before, *::after {
@@ -16,11 +15,6 @@ html {
 body {
   margin: 0;
   background-color: var(--bg-void);
-  background-image: 
-    radial-gradient(ellipse 75% 45% at 50% 0%, rgba(180, 15, 30, 0.35) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 40% at 85% 55%, rgba(120, 8, 20, 0.2) 0%, transparent 65%),
-    radial-gradient(ellipse 70% 50% at 15% 90%, rgba(140, 10, 25, 0.22) 0%, transparent 65%);
-  background-attachment: fixed;
   color: var(--c-white);
   font-family: var(--font-body);
   font-size: var(--fs-body);
@@ -32,19 +26,19 @@ body {
   min-height: 100vh;
 }
 
-/* Sutil ruido/grano de película como en la imagen 4 */
+/* Sutil ruido/grano de película tipo dither shader */
 body::after {
   content: '';
   position: fixed;
   inset: 0;
   background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 32px 32px;
+  background-size: 28px 28px;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.6;
+  opacity: 0.55;
 }
 
-/* ---- Scrollbar de Alta Velocidad ---- */
+/* ---- Scrollbar Monocromático ---- */
 ::-webkit-scrollbar {
   width: 7px;
   height: 7px;
@@ -55,15 +49,20 @@ body::after {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--c-red);
+  background: rgba(255, 255, 255, 0.25);
   border-radius: var(--radius-pill);
-  box-shadow: 0 0 10px var(--c-red);
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--c-white);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 /* ---- Selección de Texto ---- */
 ::selection {
-  background: var(--c-red);
-  color: var(--c-white);
+  background: var(--c-white);
+  color: var(--c-black);
 }
 
 /* ---- Elementos Básicos ---- */
@@ -95,7 +94,7 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
   margin: 0;
-  color: var(--c-gray);
+  color: var(--text-mid);
 }
 
 button, input, textarea {
@@ -108,7 +107,7 @@ a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid var(--c-red);
+  outline: 2px solid var(--c-white);
   outline-offset: 3px;
   border-radius: var(--radius-sm);
 }
@@ -143,7 +142,7 @@ textarea:focus-visible {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: var(--space-3);
+  gap: var(--space-4);
   margin-bottom: var(--space-4);
   flex-wrap: wrap;
 }
@@ -158,13 +157,14 @@ textarea:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: 0.6em;
-  background: rgba(255, 0, 0, 0.12);
-  border: 1px solid rgba(255, 0, 0, 0.4);
-  padding: 0.4rem 1rem;
+  background: rgba(14, 14, 20, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 0.45rem 1.1rem;
   border-radius: var(--radius-pill);
-  font-weight: 500;
-  box-shadow: 0 0 16px rgba(255, 0, 0, 0.2);
-  backdrop-filter: blur(12px);
+  font-weight: 600;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(14px);
+  text-shadow: none;
 }
 
 .eyebrow::before {
@@ -172,9 +172,14 @@ textarea:focus-visible {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--c-red);
-  box-shadow: 0 0 8px var(--c-red), 0 0 16px var(--c-red);
-  animation: pulse-red 1.6s infinite ease-in-out;
+  background: var(--c-white);
+  box-shadow: 0 0 8px #ffffff, 0 0 14px rgba(255, 255, 255, 0.6);
+  animation: pulse-white 1.8s infinite ease-in-out;
+}
+
+@keyframes pulse-white {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.35); opacity: 0.5; }
 }
 
 .section-title {
@@ -183,47 +188,65 @@ textarea:focus-visible {
   color: var(--c-white);
   text-wrap: balance;
   text-transform: uppercase;
+  text-shadow: none;
 }
 
 .section-lede {
   font-size: clamp(1.05rem, 1.8vw, 1.25rem);
-  color: var(--c-gray);
+  color: #DFE0EB;
   max-width: 740px;
   margin-top: var(--space-2);
   line-height: 1.6;
+  text-shadow: none;
 }
 
-/* ---- Botones de Alta Velocidad (<0.25s) ---- */
+/* ---- Botones Dinámicos de Alto Movimiento & Liquid Glass (<0.22s) ---- */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6em;
+  gap: 0.65em;
   font-family: var(--font-mono);
   font-size: var(--fs-mono);
   font-weight: 600;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   padding: 0.85rem 1.85rem;
   border-radius: var(--radius-pill);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(20, 2, 4, 0.7);
-  color: var(--c-white);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.06) 50%, rgba(14, 14, 20, 0.72) 100%);
+  color: #FFFFFF;
+  text-shadow: none;
   cursor: pointer;
-  backdrop-filter: blur(16px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px) saturate(190%);
+  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 255, 255, 0.5), inset 0 -1px 1px rgba(0, 0, 0, 0.5);
   transition: transform var(--dur-fast) var(--ease-elastic),
               background var(--dur-fast) var(--ease-quick),
               border-color var(--dur-fast) var(--ease-quick),
-              box-shadow var(--dur-fast) var(--ease-quick);
+              box-shadow var(--dur-fast) var(--ease-quick),
+              color var(--dur-fast) ease;
   position: relative;
   overflow: hidden;
 }
 
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 100%);
+  border-radius: var(--radius-pill) var(--radius-pill) 0 0;
+  pointer-events: none;
+}
+
 .btn:hover {
-  transform: translateY(-2px) scale(1.02);
-  border-color: var(--c-red);
-  box-shadow: 0 10px 30px rgba(255, 0, 0, 0.35);
-  color: var(--c-white);
+  transform: translateY(-3px) scale(1.02);
+  border-color: rgba(255, 255, 255, 0.65);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.12) 50%, rgba(25, 25, 35, 0.8) 100%);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.85), 0 0 25px rgba(255, 255, 255, 0.22), inset 0 1px 1px rgba(255, 255, 255, 0.7);
+  color: #FFFFFF;
 }
 
 .btn:active {
@@ -231,39 +254,56 @@ textarea:focus-visible {
 }
 
 .btn--solid {
-  background: var(--red-gradient);
-  border-color: transparent;
-  color: var(--c-white);
-  box-shadow: 0 6px 25px rgba(255, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  background: #FFFFFF !important;
+  border-color: transparent !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+  text-shadow: none !important;
+  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
 }
 
-.btn--solid:hover {
-  background: linear-gradient(135deg, #ff1a1a 0%, #cc0000 100%);
-  box-shadow: 0 10px 35px rgba(255, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+.btn--solid *,
+#contact-whatsapp,
+#contact-whatsapp * {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+.btn--solid:hover,
+#contact-whatsapp:hover {
+  background: #F0F0F5 !important;
+  box-shadow: 0 12px 40px rgba(255, 255, 255, 0.55) !important;
+  color: #000000 !important;
 }
 
 .btn--ghost {
-  background: transparent;
-  border-color: transparent;
-  box-shadow: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: #FFFFFF;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.4);
 }
 
 .btn--ghost:hover {
-  background: rgba(255, 0, 0, 0.12);
-  border-color: rgba(255, 0, 0, 0.3);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.1) 100%);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75), 0 0 20px rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
 }
 
-/* ---- Registration Square Markers (Imágenes 3 y 4 de Figma) ---- */
+/* ---- Registration Square Markers ---- */
 .reg-square {
   position: absolute;
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
   background: var(--c-white);
   border-radius: 1px;
   z-index: 10;
   pointer-events: none;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
-  animation: square-glow 2.4s infinite alternate ease-in-out;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+  opacity: 0.6;
 }
 
 .reg-square--left {
@@ -276,23 +316,6 @@ textarea:focus-visible {
   top: 50%;
   right: 20px;
   transform: translateY(-50%);
-}
-
-.reg-square--top {
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.reg-square--bottom {
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-@keyframes square-glow {
-  0% { opacity: 0.6; transform: translateY(-50%) scale(1); }
-  100% { opacity: 1; transform: translateY(-50%) scale(1.2); box-shadow: 0 0 16px var(--c-white); }
 }
 
 /* ---- Chips & Badges ---- */
@@ -308,11 +331,14 @@ textarea:focus-visible {
   font-family: var(--font-mono);
   font-size: var(--fs-tag);
   color: var(--c-white);
-  background: rgba(30, 3, 6, 0.7);
-  border: 1px solid rgba(255, 0, 0, 0.3);
+  background: rgba(22, 22, 30, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 0.5rem 1.15rem;
   border-radius: var(--radius-pill);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+  text-shadow: none;
   transition: all var(--dur-fast) var(--ease-quick);
   display: inline-flex;
   align-items: center;
@@ -320,55 +346,9 @@ textarea:focus-visible {
 }
 
 .chip:hover {
-  background: rgba(255, 0, 0, 0.25);
-  border-color: var(--c-red);
-  box-shadow: 0 0 18px rgba(255, 0, 0, 0.4);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.18);
   transform: translateY(-2px);
   color: var(--c-white);
-}
-
-/* ---- Cursor Personalizado Reactivo ---- */
-@media (pointer: fine) {
-  .custom-cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 8px;
-    height: 8px;
-    background: var(--c-red);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 99999;
-    box-shadow: 0 0 12px var(--c-red);
-    transform: translate(-50%, -50%);
-    transition: transform 0.05s linear, width 0.15s ease, height 0.15s ease, background 0.15s ease;
-  }
-
-  .custom-cursor-follower {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 32px;
-    height: 32px;
-    border: 1.5px solid rgba(255, 0, 0, 0.5);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 99998;
-    transform: translate(-50%, -50%);
-    transition: transform 0.12s var(--ease-quick), width 0.18s ease, height 0.18s ease, border-color 0.18s ease;
-  }
-
-  body.cursor-hover .custom-cursor {
-    width: 14px;
-    height: 14px;
-    background: var(--c-white);
-    box-shadow: 0 0 18px var(--c-white);
-  }
-
-  body.cursor-hover .custom-cursor-follower {
-    width: 50px;
-    height: 50px;
-    border-color: var(--c-red);
-    background: rgba(255, 0, 0, 0.12);
-  }
 }

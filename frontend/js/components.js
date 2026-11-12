@@ -1,16 +1,31 @@
 /* ============================================================================
    COMPONENTS.JS — Navegación con Píldora Deslizante & UI Omnidireccional
-   El indicador rojo (#FF0000) se desplaza suavemente al hacer clic o scroll
+   El indicador de cristal plateado se desplaza suavemente al hacer clic o scroll.
+   Marca en texto puro "Miguel Bedoya" (sin ícono circular). Cero cursor custom.
 ============================================================================ */
 
 const NAV_ITEMS = [
-  { id: 'inicio',     label: 'Inicio',     href: 'index.html#inicio',     tag: '00' },
-  { id: 'desarrollo', label: 'Desarrollo', href: 'index.html#desarrollo', tag: '01' },
-  { id: 'fotografia', label: 'Fotografía', href: 'index.html#fotografia', tag: '02' },
-  { id: 'contenido',  label: 'Contenido',  href: 'index.html#contenido',  tag: '03' },
-  { id: 'video',      label: 'Video',      href: 'index.html#video',      tag: '04' },
-  { id: 'contacto',   label: 'Contacto',   href: 'index.html#contacto',   tag: '05' }
+  { id: 'inicio',     label: 'Inicio',     href: '#inicio',     tag: '00' },
+  { id: 'desarrollo', label: 'Desarrollo', href: '#desarrollo', tag: '01' },
+  { id: 'fotografia', label: 'Fotografía', href: '#fotografia', tag: '02' },
+  { id: 'contenido',  label: 'Contenido',  href: '#contenido',  tag: '03' },
+  { id: 'video',      label: 'Video',      href: '#video',      tag: '04' },
+  { id: 'contacto',   label: 'Contacto',   href: '#contacto',   tag: '05' }
 ];
+
+// Limpieza de URL en el navegador: ocultar index.html y extensiones .html
+try {
+  if (window.history && window.history.replaceState) {
+    const loc = window.location;
+    if (loc.pathname.endsWith('index.html')) {
+      const cleanUrl = loc.pathname.replace(/index\.html$/, '') || '/';
+      window.history.replaceState({}, document.title, cleanUrl + loc.search + loc.hash);
+    } else if (loc.pathname.endsWith('.html')) {
+      const cleanUrl = loc.pathname.replace(/\.html$/, '');
+      window.history.replaceState({}, document.title, cleanUrl + loc.search + loc.hash);
+    }
+  }
+} catch (e) {}
 
 function isIndexPage() {
   const path = window.location.pathname.toLowerCase();
@@ -21,17 +36,12 @@ function isIndexPage() {
 function renderNav() {
   const mount = document.getElementById('site-nav');
   if (!mount) return;
-  const isHome = isIndexPage();
 
   mount.innerHTML = `
     <div class="nav-wrapper">
       <nav class="nav" id="nav">
-        <a href="${isHome ? '#inicio' : 'index.html#inicio'}" class="nav__brand" data-nav-target="inicio" aria-label="Miguel Bedoya — inicio">
-          <img class="nav__brand-logo" src="assets/logo.png" alt="MB logo">
-          <span class="nav__brand-name">
-            Miguel Bedoya
-            <span class="nav__brand-tag">PRO</span>
-          </span>
+        <a href="#inicio" class="nav__brand" data-nav-target="inicio" aria-label="Miguel Bedoya — inicio">
+          <span class="nav__brand-name">Miguel Bedoya</span>
         </a>
 
         <button class="nav__toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
@@ -39,12 +49,12 @@ function renderNav() {
         </button>
 
         <ul class="nav__links" id="nav-links">
-          <!-- Píldora Deslizante Roja (#FF0000) -->
+          <!-- Píldora Deslizante Plateada -->
           <div class="nav__slider" id="nav-slider"></div>
 
-          ${NAV_ITEMS.map((item, index) => `
+          ${NAV_ITEMS.map((item) => `
             <li>
-              <a href="${isHome ? '#' + item.id : item.href}" 
+              <a href="${item.href}" 
                  class="nav__link ${item.id === 'inicio' ? 'is-active' : ''}" 
                  data-nav-target="${item.id}">
                 <span class="nav__link-tag">${item.tag}</span>
@@ -54,7 +64,7 @@ function renderNav() {
           `).join('')}
         </ul>
 
-        <a href="${isHome ? '#contacto' : 'index.html#contacto'}" class="nav__cta" data-nav-target="contacto">
+        <a href="#contacto" class="nav__cta" data-nav-target="contacto">
           <span>Hablemos</span>
           <span aria-hidden="true">→</span>
         </a>
@@ -72,15 +82,19 @@ function setupNavSliderAndScroll() {
   const slider = document.getElementById('nav-slider');
   const allNavLinks = document.querySelectorAll('.nav__link');
 
-  // Función para mover la píldora roja hacia un enlace específico
+  let isNavigating = false;
+  let navTimer = null;
+
+  // Función para desplazar la píldora plateada con física fluida hacia la pestaña activa
   function moveSliderTo(linkEl) {
     if (!slider || !linkEl || window.innerWidth <= 920) return;
-    const parentLeft = linksWrap.getBoundingClientRect().left;
+    const parentRect = linksWrap.getBoundingClientRect();
     const linkRect = linkEl.getBoundingClientRect();
-    const offsetLeft = linkRect.left - parentLeft;
+    const targetOffset = linkRect.left - parentRect.left;
+    const targetWidth = linkRect.width;
 
-    slider.style.transform = `translateX(${offsetLeft}px)`;
-    slider.style.width = `${linkRect.width}px`;
+    slider.style.width = `${targetWidth}px`;
+    slider.style.transform = `translateX(${targetOffset}px)`;
     slider.classList.add('is-active');
   }
 
@@ -90,22 +104,7 @@ function setupNavSliderAndScroll() {
     if (initialActive) moveSliderTo(initialActive);
   }, 100);
 
-  // Hover interactivo sobre enlaces
-  allNavLinks.forEach(link => {
-    link.addEventListener('mouseenter', () => {
-      moveSliderTo(link);
-    });
-  });
-
-  // Al salir del menú, regresar al activo
-  if (linksWrap) {
-    linksWrap.addEventListener('mouseleave', () => {
-      const currentActive = document.querySelector('.nav__link.is-active');
-      if (currentActive) moveSliderTo(currentActive);
-    });
-  }
-
-  // Clic instantáneo en cualquier enlace
+  // Clic instantáneo en cualquier enlace (< 0.22s respuesta con desplazamiento fluido)
   document.querySelectorAll('[data-nav-target]').forEach(link => {
     link.addEventListener('click', (e) => {
       const targetId = link.getAttribute('data-nav-target');
@@ -114,7 +113,14 @@ function setupNavSliderAndScroll() {
       if (targetEl) {
         e.preventDefault();
 
-        // Actualizar active
+        // Bloquear ScrollSpy temporalmente para que no sobreescriba el desplazamiento de clic
+        isNavigating = true;
+        clearTimeout(navTimer);
+        navTimer = setTimeout(() => {
+          isNavigating = false;
+        }, 950);
+
+        // Actualizar active y desplazar la píldora inmediatamente
         allNavLinks.forEach(l => l.classList.remove('is-active'));
         const activeLink = document.querySelector(`.nav__link[data-nav-target="${targetId}"]`);
         if (activeLink) {
@@ -129,7 +135,7 @@ function setupNavSliderAndScroll() {
           toggle.setAttribute('aria-expanded', 'false');
         }
 
-        // Scroll suave e instantáneo
+        // Scroll suave hacia la sección
         targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
         if (history.pushState) {
@@ -163,29 +169,82 @@ function setupNavSliderAndScroll() {
     if (currentActive) moveSliderTo(currentActive);
   }, { passive: true });
 
-  // ScrollSpy para mover la píldora mientras el usuario hace scroll
-  initScrollSpy(moveSliderTo);
+  // ScrollSpy para mover la píldora mientras el usuario hace scroll manual
+  initScrollSpy(moveSliderTo, () => isNavigating);
 }
 
-function initScrollSpy(moveSliderTo) {
-  const sections = document.querySelectorAll('section[id]');
+function initScrollSpy(moveSliderTo, getIsNavigating) {
+  const sectionIds = ['inicio', 'desarrollo', 'fotografia', 'contenido', 'video', 'contacto'];
+  const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
   if (!sections.length) return;
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        const activeLink = document.querySelector(`.nav__link[data-nav-target="${id}"]`);
-        if (activeLink) {
-          document.querySelectorAll('.nav__link').forEach(l => l.classList.remove('is-active'));
-          activeLink.classList.add('is-active');
-          if (moveSliderTo) moveSliderTo(activeLink);
-        }
-      }
-    });
-  }, { threshold: 0.22, rootMargin: '-60px 0px -40% 0px' });
+  let currentActiveId = 'inicio';
+  let ticking = false;
 
-  sections.forEach(sec => observer.observe(sec));
+  function updateSpy() {
+    if (getIsNavigating && getIsNavigating()) {
+      ticking = false;
+      return;
+    }
+
+    const scrollY = window.scrollY || window.pageYOffset;
+    const windowH = window.innerHeight;
+    const docH = document.documentElement.scrollHeight;
+
+    // Si llegamos al final de la página, activar contacto
+    if (scrollY + windowH >= docH - 80) {
+      setActive('contacto');
+      ticking = false;
+      return;
+    }
+
+    // Si estamos en la zona superior (Hero), activar inicio
+    if (scrollY < 160) {
+      setActive('inicio');
+      ticking = false;
+      return;
+    }
+
+    // Punto de detección: 140px debajo del tope (justo debajo de la barra flotante)
+    const focalPoint = scrollY + 140;
+    let targetSection = sections[0];
+
+    for (let i = 0; i < sections.length; i++) {
+      const sec = sections[i];
+      if (sec.offsetTop <= focalPoint) {
+        targetSection = sec;
+      } else {
+        break;
+      }
+    }
+
+    if (targetSection) {
+      setActive(targetSection.id);
+    }
+
+    ticking = false;
+  }
+
+  function setActive(id) {
+    if (currentActiveId === id) return;
+    currentActiveId = id;
+    const activeLink = document.querySelector(`.nav__link[data-nav-target="${id}"]`);
+    if (activeLink) {
+      document.querySelectorAll('.nav__link').forEach(l => l.classList.remove('is-active'));
+      activeLink.classList.add('is-active');
+      if (moveSliderTo) moveSliderTo(activeLink);
+    }
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateSpy);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // Disparo inicial
+  updateSpy();
 }
 
 /* ---------------- Render Footer ---------------- */
@@ -201,12 +260,11 @@ function renderFooter() {
       <div class="footer__inner">
         <div class="footer__col">
           <div style="display: flex; align-items: center; gap: 0.75rem;">
-            <img class="nav__brand-logo" src="assets/logo.png" alt="logo">
             <span style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 800; color: #FFFFFF;">${nombre}</span>
           </div>
           <p class="footer__tagline">${PORTFOLIO_DATA.perfil.tagline}</p>
-          <div style="font-family: var(--font-mono); font-size: 13px; color: var(--c-red); display: flex; align-items: center; gap: 0.5em;">
-            <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--c-red); box-shadow: 0 0 8px var(--c-red);"></span>
+          <div style="font-family: var(--font-mono); font-size: 13px; color: var(--text-mid); display: flex; align-items: center; gap: 0.5em;">
+            <span style="width: 6px; height: 6px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 0 8px #FFFFFF;"></span>
             <span>${ubicacion} · ${coordenadas || "04°32'N 75°40'W"}</span>
           </div>
         </div>
@@ -239,7 +297,7 @@ function renderFooter() {
   `;
 }
 
-/* ---------------- Lightbox Instantáneo con Animación Spring ---------------- */
+/* ---------------- Lightbox Instantáneo con Animación Spring y Despliegue Fluido ---------------- */
 function initGlobalLightbox() {
   if (document.getElementById('global-lightbox')) return;
 
@@ -256,8 +314,14 @@ function initGlobalLightbox() {
   const closeBtn = lightbox.querySelector('.lightbox__close');
 
   const close = () => {
+    if (!lightbox.classList.contains('is-open')) return;
+    lightbox.classList.add('is-closing');
     lightbox.classList.remove('is-open');
-    imgEl.src = '';
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      lightbox.classList.remove('is-closing');
+      imgEl.src = '';
+    }, 320);
   };
 
   closeBtn.addEventListener('click', close);
@@ -270,58 +334,19 @@ function initGlobalLightbox() {
   });
 
   document.addEventListener('click', (e) => {
-    const galleryTarget = e.target.closest('.gallery-item');
-    if (galleryTarget) {
-      const img = galleryTarget.querySelector('img');
+    const target = e.target.closest('.gallery-item, #hero-photo, [data-lightbox]');
+    if (target) {
+      const img = target.tagName === 'IMG' ? target : target.querySelector('img');
       if (img && img.src) {
         imgEl.src = img.src;
-        lightbox.classList.add('is-open');
+        imgEl.alt = img.alt || 'Vista ampliada';
+        lightbox.classList.remove('is-closing', 'is-open');
+        document.body.style.overflow = 'hidden';
+        void lightbox.offsetWidth; // Forzar reflow para animación visible
+        requestAnimationFrame(() => {
+          lightbox.classList.add('is-open');
+        });
       }
-    }
-  });
-}
-
-/* ---------------- Cursor Reactivo Ultrarrápido ---------------- */
-function initCustomCursor() {
-  if (window.matchMedia('(pointer: coarse)').matches) return;
-  if (document.querySelector('.custom-cursor')) return;
-
-  const cursor = document.createElement('div');
-  cursor.className = 'custom-cursor';
-
-  const follower = document.createElement('div');
-  follower.className = 'custom-cursor-follower';
-
-  document.body.appendChild(cursor);
-  document.body.appendChild(follower);
-
-  let mouseX = -100, mouseY = -100;
-  let followerX = -100, followerY = -100;
-
-  window.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
-  }, { passive: true });
-
-  function renderFollower() {
-    followerX += (mouseX - followerX) * 0.3;
-    followerY += (mouseY - followerY) * 0.3;
-    follower.style.transform = `translate(${followerX}px, ${followerY}px)`;
-    requestAnimationFrame(renderFollower);
-  }
-  requestAnimationFrame(renderFollower);
-
-  const interactiveSelector = 'a, button, input, textarea, .card, .gallery-item, .track, .chip, .hero__portrait-img';
-  document.addEventListener('mouseover', (e) => {
-    if (e.target.closest(interactiveSelector)) {
-      document.body.classList.add('cursor-hover');
-    }
-  });
-
-  document.addEventListener('mouseout', (e) => {
-    if (e.target.closest(interactiveSelector)) {
-      document.body.classList.remove('cursor-hover');
     }
   });
 }
@@ -330,5 +355,4 @@ document.addEventListener('DOMContentLoaded', () => {
   renderNav();
   renderFooter();
   initGlobalLightbox();
-  initCustomCursor();
 });

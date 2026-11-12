@@ -57,7 +57,7 @@ async function enviarEmailNotificacion(entry) {
     timeStyle: 'short'
   });
 
-  const subject = `📩 Nueva solicitud de contacto — ${entry.nombre}`;
+  const subject = `Propuesta de proyecto — ${entry.nombre} (${proyecto})`;
   const proyecto = entry.proyecto || '(no especificado)';
   const whatsapp = entry.whatsapp || '(no especificado)';
   const mensajeHtml = escapeHtml(String(entry.mensaje)).replace(/\n/g, '<br>');
@@ -176,12 +176,12 @@ module.exports = async (req, res) => {
     } catch (err) {
       console.error('Error enviando email:', err);
       res.status(502).json({
-        error: 'El mensaje se guardó, pero no se pudo enviar el correo. Revisa tus variables de entorno de Vercel y la contraseña de aplicación de Gmail.'
+        error: 'El mensaje se guardó, pero no se pudo enviar el correo. Revisa tus variables de entorno y la contraseña de aplicación de Gmail.'
       });
       return;
     }
   } else {
-    console.warn('Email no configurado. Coloca GMAIL_USER y GMAIL_APP_PASSWORD en las variables de entorno de Vercel.');
+    console.warn('Email no configurado. Coloca GMAIL_USER y GMAIL_APP_PASSWORD en las variables de entorno.');
   }
 
   res.status(200).json({
@@ -189,6 +189,6 @@ module.exports = async (req, res) => {
     message: 'Mensaje recibido correctamente.',
     emailConfigured,
     emailTo: emailDestination,
-    warning: emailConfigured ? undefined : 'Email no configurado; el mensaje no fue guardado de forma permanente en Vercel y no se envió por correo.'
+    warning: emailConfigured ? undefined : 'Email no configurado; coloca tus credenciales en el archivo de entorno.'
   });
 };

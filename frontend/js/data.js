@@ -11,9 +11,10 @@ const PORTFOLIO_DATA = {
     tagline: "Diseño, construyo y cuento historias.",
     roles: [
       "Desarrollador Web",
-      "Fotógrafo",
-      "Creador de Contenido",
-      "Editor de Video"
+      "Ingeniero de Software",
+      "Filmmaker",
+      "Editor de Video",
+      "Creador de Contenido"
     ],
     ubicacion: "Armenia, Quindío, Colombia",
     coordenadas: "04°32'N 75°40'W",
@@ -22,7 +23,7 @@ const PORTFOLIO_DATA = {
     email: "beleonnm@gmail.com",
     telefono: "+57 310 209 9975",
     whatsapp: "573102099975",
-    foto: "assets/perfil.jpg",
+    foto: "assets/perfil.png",
     cv: "assets/Miguel Bedoya CV..pdf.pdf"
   },
 
@@ -40,18 +41,27 @@ const PORTFOLIO_DATA = {
     intro: "Construyo sitios y aplicaciones rápidas, accesibles y cuidadas al detalle — del diseño a la puesta en producción.",
     github: "Lyonn23",
     servicios: [
+      "Edición de video comercial y corporativo para marcas y empresas",
+      "Spots publicitarios y reels de alto impacto para redes",
+      "Storytelling audiovisual & contenido de conversión para negocios",
+      "Post-producción profesional (Color Grading & Sound Design)",
       "Webs estratégicas para empresas y profesionales",
-      "Páginas publicitarias para negocios",
+      "Páginas publicitarias y landing pages de conversión",
       "Webs para marcas personales",
-      "Páginas e invitaciones interactivas para eventos",
-      "Babyshowers",
-      "Bodas"
+      "Páginas e invitaciones interactivas para eventos"
     ],
     stack: [
-      "HTML5", "CSS3", "JavaScript", "React", "Node.js",
-      "Express", "MongoDB", "Git", "Figma", "Tailwind CSS"
+      "JavaScript", "Python", "Java", "React", "Node.js",
+      "HTML5", "CSS3", "Express", "MongoDB", "Git", "Figma", "Tailwind CSS"
     ],
     proyectos: [
+      {
+        titulo: "Ninjas Rise — Servidor de Minecraft",
+        categoria: "Full-Stack Web & E-Commerce",
+        descripcion: "Plataforma web oficial diseñada y desarrollada en su totalidad para el servidor de Minecraft Ninjas Rise. Incluye tienda online, estadísticas, presentación de modalidades y experiencia inmersiva optimizada.",
+        tags: ["Full-Stack", "JavaScript", "E-Commerce", "UI/UX Inmersivo", "Performance"],
+        link: "https://ninjasrise.com"
+      },
       {
         titulo: "Plataformas Web Estratégicas",
         categoria: "Full-Stack Development",
@@ -64,14 +74,14 @@ const PORTFOLIO_DATA = {
         categoria: "Creative Front-End",
         descripcion: "Experiencias web inmersivas para celebraciones especiales (Bodas, Babyshowers), con interacción táctil, confirmación en vivo y narrativa.",
         tags: ["UI/UX", "Interactivo", "Mobile First", "Figma"],
-        link: "contacto.html"
+        link: "#contacto"
       },
       {
         titulo: "Webs de Marca Personal & Comercial",
         categoria: "Identidad & Performance",
         descripcion: "Páginas publicitarias para negocios con enfoque en posicionamiento, elegancia visual y captura de clientes potenciales.",
         tags: ["Performance", "SEO", "Tailwind CSS", "Diseño"],
-        link: "contacto.html"
+        link: "#contacto"
       }
     ]
   },
@@ -96,11 +106,48 @@ const PORTFOLIO_DATA = {
 
   /* ---------------- CREACIÓN DE CONTENIDO ---------------- */
   contenido: {
-    intro: "Diseño contenido pensado para detener el scroll: guion, formato y estética adaptados a cada plataforma.",
-    plataformas: [
-      { nombre: "Seguidores Instagram", seguidores: "1.194" },
-      { nombre: "Seguidores TikTok",    seguidores: "84" },
-      { nombre: "Seguidores YouTube",   seguidores: "33" }
+    intro: "Diseño contenido pensado para detener el scroll: guion, formato y estética adaptados a cada plataforma. Haz clic en cualquiera para ver mi perfil y contenido directamente.",
+    canales: [
+      {
+        id: "instagram",
+        nombre: "Instagram",
+        handle: "@beleonm",
+        subtitulo: "Fotografía, estilo de vida & reels",
+        url: "https://instagram.com/beleonm",
+        badge: "Visual & Reels"
+      },
+      {
+        id: "tiktok",
+        nombre: "TikTok",
+        handle: "@beleonm",
+        subtitulo: "Reflexiones, fe & narrativa corta",
+        url: "https://tiktok.com/@beleonm",
+        badge: "Videos Cortos"
+      },
+      {
+        id: "youtube",
+        nombre: "YouTube",
+        handle: "@beleonnm",
+        subtitulo: "Historias en video & formato largo",
+        url: "https://www.youtube.com/@beleonnm",
+        badge: "Canal Oficial"
+      },
+      {
+        id: "github",
+        nombre: "GitHub",
+        handle: "@Lyonn23",
+        subtitulo: "Código abierto & proyectos web",
+        url: "https://github.com/Lyonn23",
+        badge: "Dev Suite"
+      },
+      {
+        id: "linkedin",
+        nombre: "LinkedIn",
+        handle: "Miguel Bedoya León",
+        subtitulo: "Perfil profesional & networking",
+        url: "https://www.linkedin.com/in/miguel-bedoya-león-725082343/",
+        badge: "Profesional"
+      }
     ],
     piezas: [
       {
