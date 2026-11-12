@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "portafolio-miguel-bedoya",
+  "compatibility_date": "2026-11-10",
+  "assets": {
+    "directory": "frontend"
+  },
+  "observability": {
+    "enabled": true
+  }
+}
+
