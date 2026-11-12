@@ -1,0 +1,13 @@
+# Dependencias
+node_modules/
+
+# Entorno y credenciales
+.env
+.env.local
+
+# Archivos pesados originales de respaldo (no para web)
+raw_assets/
+
+# Logs de Wrangler
+.wrangler/
+
