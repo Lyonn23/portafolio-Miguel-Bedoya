@@ -169,7 +169,12 @@ function renderVideo() {
         <video src="${p.videoSrc}" title="${p.titulo}" controls preload="metadata" playsinline></video>
       </div>
       <div class="card__body">
-        <span class="card__eyebrow">${p.tipo}</span>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span class="card__eyebrow">${p.tipo}</span>
+          <div class="soundwave" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </div>
         <h3 class="card__title">${p.titulo}</h3>
         <p class="card__desc">${p.descripcion}</p>
       </div>

@@ -1,7 +1,6 @@
 /* ============================================================================
-   COMPONENTS.JS — Navegación Omnidireccional Instantánea (<0.2s) & UI Global
-   Garantiza que todos los botones de la barra funcionen en cualquier orden
-   desde cualquier apartado con respuesta máxima de 0.2 segundos.
+   COMPONENTS.JS — Navegación con Píldora Deslizante & UI Omnidireccional
+   El indicador rojo (#FF0000) se desplaza suavemente al hacer clic o scroll
 ============================================================================ */
 
 const NAV_ITEMS = [
@@ -40,7 +39,10 @@ function renderNav() {
         </button>
 
         <ul class="nav__links" id="nav-links">
-          ${NAV_ITEMS.map(item => `
+          <!-- Píldora Deslizante Roja (#FF0000) -->
+          <div class="nav__slider" id="nav-slider"></div>
+
+          ${NAV_ITEMS.map((item, index) => `
             <li>
               <a href="${isHome ? '#' + item.id : item.href}" 
                  class="nav__link ${item.id === 'inicio' ? 'is-active' : ''}" 
@@ -60,15 +62,84 @@ function renderNav() {
     </div>
   `;
 
-  setupNavInteractions();
+  setupNavSliderAndScroll();
 }
 
-/* ---------------- Interacciones de Navegación Instantánea ---------------- */
-function setupNavInteractions() {
+/* ---------------- Lógica de la Píldora Deslizante ---------------- */
+function setupNavSliderAndScroll() {
   const toggle = document.getElementById('nav-toggle');
   const linksWrap = document.getElementById('nav-links');
-  const allNavLinks = document.querySelectorAll('[data-nav-target]');
+  const slider = document.getElementById('nav-slider');
+  const allNavLinks = document.querySelectorAll('.nav__link');
 
+  // Función para mover la píldora roja hacia un enlace específico
+  function moveSliderTo(linkEl) {
+    if (!slider || !linkEl || window.innerWidth <= 920) return;
+    const parentLeft = linksWrap.getBoundingClientRect().left;
+    const linkRect = linkEl.getBoundingClientRect();
+    const offsetLeft = linkRect.left - parentLeft;
+
+    slider.style.transform = `translateX(${offsetLeft}px)`;
+    slider.style.width = `${linkRect.width}px`;
+    slider.classList.add('is-active');
+  }
+
+  // Posicionar en el elemento activo inicial
+  setTimeout(() => {
+    const initialActive = document.querySelector('.nav__link.is-active') || allNavLinks[0];
+    if (initialActive) moveSliderTo(initialActive);
+  }, 100);
+
+  // Hover interactivo sobre enlaces
+  allNavLinks.forEach(link => {
+    link.addEventListener('mouseenter', () => {
+      moveSliderTo(link);
+    });
+  });
+
+  // Al salir del menú, regresar al activo
+  if (linksWrap) {
+    linksWrap.addEventListener('mouseleave', () => {
+      const currentActive = document.querySelector('.nav__link.is-active');
+      if (currentActive) moveSliderTo(currentActive);
+    });
+  }
+
+  // Clic instantáneo en cualquier enlace
+  document.querySelectorAll('[data-nav-target]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const targetId = link.getAttribute('data-nav-target');
+      const targetEl = document.getElementById(targetId);
+
+      if (targetEl) {
+        e.preventDefault();
+
+        // Actualizar active
+        allNavLinks.forEach(l => l.classList.remove('is-active'));
+        const activeLink = document.querySelector(`.nav__link[data-nav-target="${targetId}"]`);
+        if (activeLink) {
+          activeLink.classList.add('is-active');
+          moveSliderTo(activeLink);
+        }
+
+        // Cerrar menú móvil
+        if (linksWrap) linksWrap.classList.remove('is-open');
+        if (toggle) {
+          toggle.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+
+        // Scroll suave e instantáneo
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        if (history.pushState) {
+          history.pushState(null, null, '#' + targetId);
+        }
+      }
+    });
+  });
+
+  // Toggle móvil
   if (toggle && linksWrap) {
     toggle.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -86,76 +157,33 @@ function setupNavInteractions() {
     });
   }
 
-  // Manejo de clic ultra-rápido en cualquier botón de la barra
-  allNavLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      const targetId = link.getAttribute('data-nav-target');
-      const targetEl = document.getElementById(targetId);
+  // Sincronizar al redimensionar
+  window.addEventListener('resize', () => {
+    const currentActive = document.querySelector('.nav__link.is-active');
+    if (currentActive) moveSliderTo(currentActive);
+  }, { passive: true });
 
-      if (targetEl) {
-        // En la misma página: salto suave e instantáneo sin recargar
-        e.preventDefault();
-        
-        // Actualizar visualmente la clase activa al instante (<0.05s)
-        document.querySelectorAll('.nav__link').forEach(l => l.classList.remove('is-active'));
-        const activeItem = document.querySelector(`.nav__link[data-nav-target="${targetId}"]`);
-        if (activeItem) activeItem.classList.add('is-active');
-
-        // Cerrar menú móvil al instante
-        if (linksWrap) linksWrap.classList.remove('is-open');
-        if (toggle) {
-          toggle.classList.remove('is-open');
-          toggle.setAttribute('aria-expanded', 'false');
-        }
-
-        // Scroll suave hacia la sección
-        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-        // Actualizar hash en la URL sin salto brusco
-        if (history.pushState) {
-          history.pushState(null, null, '#' + targetId);
-        }
-      }
-    });
-  });
-
-  // Si la página se abre con un hash (ej: index.html#video), desplazar de inmediato
-  if (window.location.hash) {
-    const hashId = window.location.hash.substring(1);
-    const hashEl = document.getElementById(hashId);
-    if (hashEl) {
-      setTimeout(() => {
-        hashEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        document.querySelectorAll('.nav__link').forEach(l => l.classList.remove('is-active'));
-        const activeLink = document.querySelector(`.nav__link[data-nav-target="${hashId}"]`);
-        if (activeLink) activeLink.classList.add('is-active');
-      }, 50);
-    }
-  }
-
-  // Observer de Scroll para actualizar el botón activo automáticamente
-  initScrollSpy();
+  // ScrollSpy para mover la píldora mientras el usuario hace scroll
+  initScrollSpy(moveSliderTo);
 }
 
-/* ---------------- Scroll Spy para la barra de navegación ---------------- */
-function initScrollSpy() {
-  const sections = document.querySelectorAll('section[id], header[id]');
+function initScrollSpy(moveSliderTo) {
+  const sections = document.querySelectorAll('section[id]');
   if (!sections.length) return;
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const id = entry.target.getAttribute('id');
-        document.querySelectorAll('.nav__link').forEach(l => {
-          if (l.getAttribute('data-nav-target') === id) {
-            l.classList.add('is-active');
-          } else {
-            l.classList.remove('is-active');
-          }
-        });
+        const activeLink = document.querySelector(`.nav__link[data-nav-target="${id}"]`);
+        if (activeLink) {
+          document.querySelectorAll('.nav__link').forEach(l => l.classList.remove('is-active'));
+          activeLink.classList.add('is-active');
+          if (moveSliderTo) moveSliderTo(activeLink);
+        }
       }
     });
-  }, { threshold: 0.25, rootMargin: '-60px 0px -50% 0px' });
+  }, { threshold: 0.22, rootMargin: '-60px 0px -40% 0px' });
 
   sections.forEach(sec => observer.observe(sec));
 }
@@ -211,7 +239,7 @@ function renderFooter() {
   `;
 }
 
-/* ---------------- Lightbox de Fotografía Instantáneo ---------------- */
+/* ---------------- Lightbox Instantáneo con Animación Spring ---------------- */
 function initGlobalLightbox() {
   if (document.getElementById('global-lightbox')) return;
 
@@ -277,8 +305,8 @@ function initCustomCursor() {
   }, { passive: true });
 
   function renderFollower() {
-    followerX += (mouseX - followerX) * 0.28;
-    followerY += (mouseY - followerY) * 0.28;
+    followerX += (mouseX - followerX) * 0.3;
+    followerY += (mouseY - followerY) * 0.3;
     follower.style.transform = `translate(${followerX}px, ${followerY}px)`;
     requestAnimationFrame(renderFollower);
   }

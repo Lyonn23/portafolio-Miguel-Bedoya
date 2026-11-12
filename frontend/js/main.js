@@ -1,5 +1,5 @@
 /* ============================================================================
-   MAIN.JS — Animaciones Gear Reveal de Alto Rendimiento & Respuesta <0.2s
+   MAIN.JS — Animaciones Fluidas, 3D Tilt, Contadores Dinámicos & Parallax
 ============================================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initRoleTyper();
   initHeroParallax();
   initCard3DTilt();
+  initAnimatedCounters();
 });
 
 /* ---------------- Reveal Ultrarrápido al Hacer Scroll ---------------- */
@@ -49,7 +50,7 @@ function initRoleTyper() {
   let charIndex = 0;
   let deleting = false;
 
-  const TYPE_SPEED = 45;   // Rápido y enérgico
+  const TYPE_SPEED = 45;
   const DELETE_SPEED = 25;
   const HOLD_TIME = 1300;
 
@@ -79,12 +80,12 @@ function initRoleTyper() {
   tick();
 }
 
-/* ---------------- Parallax 3D Central (Foto + Anillos + Mega Título) ---------------- */
+/* ---------------- Parallax Suave del Escenario Derecho ---------------- */
 function initHeroParallax() {
   const hero = document.querySelector('.hero');
   const portrait = document.querySelector('.hero__portrait-img');
   const stadium = document.querySelector('.stadium-stage');
-  const megaTitle = document.querySelector('.hero__mega-title');
+  const watermark = document.querySelector('.hero__stage-watermark');
 
   if (!hero || window.matchMedia('(pointer: coarse)').matches) return;
 
@@ -95,7 +96,7 @@ function initHeroParallax() {
     const rect = hero.getBoundingClientRect();
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
-    mouseX = (e.clientX - cx) / (rect.width / 2); // -1 a 1
+    mouseX = (e.clientX - cx) / (rect.width / 2);
     mouseY = (e.clientY - cy) / (rect.height / 2);
   }, { passive: true });
 
@@ -109,15 +110,15 @@ function initHeroParallax() {
     currentY += (mouseY - currentY) * 0.12;
 
     if (portrait) {
-      portrait.style.transform = `perspective(1000px) rotateY(${currentX * 10}deg) rotateX(${-currentY * 8}deg) translate3d(${currentX * 12}px, ${currentY * 8}px, 0)`;
+      portrait.style.transform = `perspective(1000px) rotateY(${currentX * 8}deg) rotateX(${-currentY * 6}deg) translate3d(${currentX * 10}px, ${currentY * 6}px, 0)`;
     }
 
     if (stadium) {
-      stadium.style.transform = `translate(calc(-50% + ${-currentX * 18}px), calc(-50% + ${-currentY * 12}px)) rotate(${currentX * 2}deg)`;
+      stadium.style.transform = `translateY(-50%) translate3d(${-currentX * 14}px, ${-currentY * 10}px, 0) rotate(${currentX * 1.5}deg)`;
     }
 
-    if (megaTitle) {
-      megaTitle.style.transform = `translate(calc(-50% + ${currentX * 25}px), calc(-50% + ${currentY * 15}px))`;
+    if (watermark) {
+      watermark.style.transform = `translateY(-50%) translate3d(${currentX * 20}px, ${currentY * 12}px, 0)`;
     }
 
     requestAnimationFrame(renderParallax);
@@ -126,7 +127,7 @@ function initHeroParallax() {
   requestAnimationFrame(renderParallax);
 }
 
-/* ---------------- 3D Tilt Reactivo en Tarjetas (<0.15s) ---------------- */
+/* ---------------- 3D Tilt Reactivo en Tarjetas con Reflejo Dinámico ---------------- */
 function initCard3DTilt() {
   const tiltCards = document.querySelectorAll('.card, .track, .stat');
   if (!tiltCards.length || window.matchMedia('(pointer: coarse)').matches) return;
@@ -141,11 +142,11 @@ function initCard3DTilt() {
 
     card.addEventListener('mousemove', (e) => {
       if (!rect) rect = card.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 a 0.5
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
       const y = (e.clientY - rect.top) / rect.height - 0.5;
 
-      const rotX = -y * 12;
-      const rotY = x * 12;
+      const rotX = -y * 10;
+      const rotY = x * 10;
 
       card.style.transform = `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px) scale(1.01)`;
     });
@@ -155,4 +156,52 @@ function initCard3DTilt() {
       card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) translateY(0) scale(1)';
     });
   });
+}
+
+/* ---------------- Animación de Números Rodantes en Estadísticas ---------------- */
+function initAnimatedCounters() {
+  const stats = document.querySelectorAll('.stat__value');
+  if (!stats.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const text = el.textContent.trim();
+        const numMatch = text.match(/\d+[\.,]?\d*/);
+
+        if (numMatch) {
+          const rawNum = parseInt(numMatch[0].replace(/\D/g, ''), 10);
+          if (!isNaN(rawNum) && rawNum > 0) {
+            let start = 0;
+            const duration = 1200;
+            const startTime = performance.now();
+
+            function updateCounter(now) {
+              const elapsed = now - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              // easeOutQuart
+              const ease = 1 - Math.pow(1 - progress, 4);
+              const current = Math.floor(ease * rawNum);
+
+              // Conservar formato original (ej: 1.194 o +29.000)
+              const formatted = current.toLocaleString('es-CO');
+              el.textContent = text.replace(numMatch[0], formatted);
+
+              if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+              } else {
+                el.textContent = text;
+              }
+            }
+
+            requestAnimationFrame(updateCounter);
+          }
+        }
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  stats.forEach(s => observer.observe(s));
 }

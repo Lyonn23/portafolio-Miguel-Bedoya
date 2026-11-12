@@ -28,40 +28,16 @@
   <div class="reg-square reg-square--left" aria-hidden="true"></div>
   <div class="reg-square reg-square--right" aria-hidden="true"></div>
 
-  <!-- Navegación Flotante Omnidireccional Instantánea -->
+  <!-- Navegación Flotante con Píldora Deslizante Roja -->
   <div id="site-nav"></div>
 
   <main>
     <!-- ===================================================================
-         SECCIÓN 00: INICIO (HERO GEAR REVEAL STAGE)
+         SECCIÓN 00: INICIO (HERO GEAR REVEAL STAGE - SIN COLISIONES)
          =================================================================== -->
     <section class="hero container" id="inicio">
-      <!-- Anillos Concéntricos de Estadio en Movimiento Continuo (SVG Central) -->
-      <div class="stadium-stage" aria-hidden="true">
-        <svg viewBox="0 0 700 900" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect class="stadium-contour" x="280" y="380" width="140" height="140" rx="70" />
-          <rect class="stadium-contour" x="230" y="330" width="240" height="240" rx="120" />
-          <rect class="stadium-contour stadium-contour--core" x="180" y="270" width="340" height="360" rx="170" />
-          <rect class="stadium-contour" x="130" y="210" width="440" height="480" rx="220" />
-          <rect class="stadium-contour" x="80" y="150" width="540" height="600" rx="270" />
-          <rect class="stadium-contour" x="30" y="90" width="640" height="720" rx="320" />
-          <rect class="stadium-contour" x="5" y="30" width="690" height="840" rx="345" />
-        </svg>
-      </div>
-
-      <!-- Mega Título Ultra-Wide de Fondo (Estilo "CO2" de Syncopate) -->
-      <div class="hero__mega-title" aria-hidden="true">
-        <span>MB</span>
-      </div>
-
-      <!-- Foto de Miguel (Sujeto Central/Lateral Flotante con Máscara Orgánica) -->
-      <div class="hero__portrait-stage">
-        <div class="hero__portrait-glow" aria-hidden="true"></div>
-        <img src="assets/perfil.jpg" alt="Miguel Bedoya — Creador Audiovisual & Desarrollador Web" class="hero__portrait-img" id="hero-photo">
-      </div>
-
-      <!-- Información Principal del Hero -->
       <div class="hero__inner">
+        <!-- Columna Izquierda: Información & Tipografía Limpia -->
         <div class="hero__content">
           <!-- Badge de Disponibilidad con LED Pulsante -->
           <div class="hero__badge" id="availability-badge">
@@ -76,7 +52,7 @@
             </div>
           </div>
 
-          <!-- Titular Monumental -->
+          <!-- Titular Principal Limpio (Sin Textos Encima) -->
           <h1 class="hero__title">
             Diseño, construyo<br>
             <span class="highlight">&amp; cuento historias.</span>
@@ -101,6 +77,35 @@
               Descargar CV
             </a>
             <a href="#desarrollo" data-nav-target="desarrollo" class="btn btn--ghost">Explorar Disciplinas ↓</a>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Escenario Visual Limpio & Foto Integrada a la Derecha -->
+        <div class="hero__stage-right">
+          <!-- Anillos Concéntricos de Estadio en el Escenario Derecho -->
+          <div class="stadium-stage" aria-hidden="true">
+            <svg viewBox="0 0 700 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect class="stadium-contour" x="280" y="380" width="140" height="140" rx="70" />
+              <rect class="stadium-contour" x="230" y="330" width="240" height="240" rx="120" />
+              <rect class="stadium-contour stadium-contour--core" x="180" y="270" width="340" height="360" rx="170" />
+              <rect class="stadium-contour" x="130" y="210" width="440" height="480" rx="220" />
+              <rect class="stadium-contour" x="80" y="150" width="540" height="600" rx="270" />
+              <rect class="stadium-contour" x="30" y="90" width="640" height="720" rx="320" />
+              <rect class="stadium-contour" x="5" y="30" width="690" height="840" rx="345" />
+            </svg>
+          </div>
+
+          <!-- Marca de Agua "MB" Sutil de Fondo en el Escenario Derecho -->
+          <div class="hero__stage-watermark" aria-hidden="true">MB</div>
+
+          <!-- Micro-etiquetas flotantes HUD -->
+          <div class="hero__stage-tag hero__stage-tag--top">[ 04°32'N 75°40'W ]</div>
+          <div class="hero__stage-tag hero__stage-tag--bottom">SYS.01 // FULL-STACK</div>
+
+          <!-- Foto de Miguel Integrada a la Derecha con Máscara Suave -->
+          <div class="hero__portrait-stage">
+            <div class="hero__portrait-glow" aria-hidden="true"></div>
+            <img src="assets/perfil.jpg" alt="Miguel Bedoya — Creador Audiovisual & Desarrollador Web" class="hero__portrait-img" id="hero-photo">
           </div>
         </div>
       </div>

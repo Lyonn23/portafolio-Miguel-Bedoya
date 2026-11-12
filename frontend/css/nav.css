@@ -1,6 +1,7 @@
 /* ============================================================================
-   NAV.CSS — Navegación Flotante de Alta Velocidad (<0.25s)
-   Colores Oficiales: #FFFFFF, #000000, #FF0000, #B3B3B3, #323232
+   NAV.CSS — Navegación Flotante con Píldora Roja Deslizante
+   El fondo rojo (#FF0000) se desplaza físicamente entre los botones
+   con física elástica y respuesta instantánea (<0.22s)
 ============================================================================ */
 
 .nav-wrapper {
@@ -18,25 +19,25 @@
 .nav {
   pointer-events: auto;
   width: min(100%, var(--max-w));
-  height: 60px;
+  height: 58px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1.25rem;
-  background: rgba(14, 2, 4, 0.88);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0 0.85rem 0 1.25rem;
+  background: rgba(12, 1, 3, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: var(--radius-pill);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 15px rgba(255, 0, 0, 0.08);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.85), 0 0 20px rgba(255, 0, 0, 0.1);
   transition: all var(--dur-fast) var(--ease-quick);
 }
 
 .nav.is-scrolled {
-  height: 54px;
-  background: rgba(10, 1, 2, 0.95);
-  border-color: rgba(255, 0, 0, 0.4);
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.95), 0 0 25px rgba(255, 0, 0, 0.18);
+  height: 52px;
+  background: rgba(8, 1, 2, 0.96);
+  border-color: rgba(255, 0, 0, 0.45);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.95), 0 0 30px rgba(255, 0, 0, 0.22);
 }
 
 /* ---- Brand & Logo ---- */
@@ -54,17 +55,17 @@
   border-radius: 50%;
   object-fit: cover;
   border: 1.5px solid var(--c-red);
-  box-shadow: 0 0 12px rgba(255, 0, 0, 0.4);
-  transition: transform var(--dur-fast) var(--ease-elastic);
+  box-shadow: 0 0 12px rgba(255, 0, 0, 0.45);
+  transition: transform 0.25s var(--ease-elastic);
 }
 
 .nav__brand:hover .nav__brand-logo {
-  transform: scale(1.1) rotate(-5deg);
+  transform: scale(1.12) rotate(-6deg);
   box-shadow: 0 0 18px var(--c-red);
 }
 
 .nav__brand-name {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 800;
   color: var(--c-white);
   letter-spacing: -0.02em;
@@ -84,43 +85,72 @@
   box-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
 }
 
-/* ---- Nav Links ---- */
+/* ---- Contenedor de Enlaces con Píldora Deslizante ---- */
 .nav__links {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.2rem;
+  padding: 3px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* LA PÍLDORA ROJA QUE SE DESPLAZA FÍSICAMENTE */
+.nav__slider {
+  position: absolute;
+  top: 3px;
+  left: 0;
+  height: calc(100% - 6px);
+  background: var(--c-red);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 0 18px rgba(255, 0, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  z-index: 1;
+  transform: translateX(0);
+  width: 0;
+  opacity: 0;
+  transition: transform 0.26s cubic-bezier(0.34, 1.56, 0.64, 1),
+              width 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.15s ease;
+}
+
+.nav__slider.is-active {
+  opacity: 1;
 }
 
 .nav__link {
+  position: relative;
+  z-index: 2;
   font-family: var(--font-mono);
   font-size: 13px;
   font-weight: 600;
   color: var(--c-gray);
   padding: 0.45rem 0.95rem;
   border-radius: var(--radius-pill);
-  transition: all var(--dur-fast) var(--ease-quick);
+  transition: color 0.18s ease;
   display: inline-flex;
   align-items: center;
-  gap: 0.4em;
+  gap: 0.35em;
   cursor: pointer;
-  position: relative;
+  white-space: nowrap;
 }
 
 .nav__link-tag {
-  font-size: 11px;
+  font-size: 10px;
   color: var(--c-red);
-  opacity: 0.8;
+  opacity: 0.85;
+  transition: color 0.18s ease, opacity 0.18s ease;
 }
 
 .nav__link:hover {
   color: var(--c-white);
-  background: rgba(255, 255, 255, 0.08);
 }
 
 .nav__link.is-active {
   color: var(--c-white);
-  background: var(--c-red);
-  box-shadow: 0 0 16px rgba(255, 0, 0, 0.6);
+  font-weight: 700;
 }
 
 .nav__link.is-active .nav__link-tag {
@@ -128,7 +158,7 @@
   opacity: 1;
 }
 
-/* ---- CTA Rápido Nav ---- */
+/* ---- Botón CTA Rápido Nav ---- */
 .nav__cta {
   display: inline-flex;
   align-items: center;
@@ -143,14 +173,14 @@
   background: var(--red-gradient);
   color: var(--c-white);
   border: none;
-  box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
+  box-shadow: 0 4px 15px rgba(255, 0, 0, 0.45);
   transition: transform var(--dur-fast) var(--ease-elastic), box-shadow var(--dur-fast) ease;
   cursor: pointer;
 }
 
 .nav__cta:hover {
-  transform: translateY(-1px) scale(1.04);
-  box-shadow: 0 6px 22px rgba(255, 0, 0, 0.7);
+  transform: translateY(-1px) scale(1.05);
+  box-shadow: 0 6px 24px rgba(255, 0, 0, 0.75);
 }
 
 /* ---- Mobile Menu Toggle ---- */
@@ -184,35 +214,32 @@
 .nav__toggle.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* ---- Responsive Nav ---- */
-@media (max-width: 900px) {
-  .nav__cta {
-    display: none;
-  }
-
-  .nav__toggle {
-    display: flex;
-  }
+@media (max-width: 920px) {
+  .nav__cta { display: none; }
+  .nav__toggle { display: flex; }
 
   .nav__links {
     position: fixed;
-    top: 68px;
+    top: 66px;
     left: 12px;
     right: 12px;
-    background: rgba(10, 1, 2, 0.96);
-    border: 1px solid rgba(255, 0, 0, 0.35);
+    background: rgba(10, 1, 2, 0.98);
+    border: 1px solid rgba(255, 0, 0, 0.4);
     border-radius: var(--radius-lg);
     backdrop-filter: blur(28px);
     -webkit-backdrop-filter: blur(28px);
     flex-direction: column;
     align-items: stretch;
-    padding: 1rem;
+    padding: 0.85rem;
     gap: 0.4rem;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95);
     opacity: 0;
     pointer-events: none;
     transform: translateY(-10px) scale(0.97);
     transition: all var(--dur-fast) var(--ease-quick);
   }
+
+  .nav__slider { display: none; } /* En móvil usamos active background estándar */
 
   .nav__links.is-open {
     opacity: 1;
@@ -221,8 +248,13 @@
   }
 
   .nav__link {
-    padding: 0.8rem 1rem;
+    padding: 0.85rem 1.15rem;
     font-size: 15px;
     justify-content: space-between;
+  }
+
+  .nav__link.is-active {
+    background: var(--c-red);
+    box-shadow: 0 0 16px rgba(255, 0, 0, 0.6);
   }
 }

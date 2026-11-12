@@ -1,11 +1,9 @@
 /* ============================================================================
-   HERO.CSS — "Gear Reveal" Central Stage
-   Inspirado directamente en las imágenes 2, 3 y 4:
-   - Sujeto central/lateral flotante con máscara orgánica (foto de Miguel)
-   - Anillos concéntricos de pista de atletismo / estadio en movimiento continuo
-   - Título monumental ultra-wide (Syncopate / Michroma) estilo "CO2"
-   - Micro-textos técnicos estilo "acme©" y "Akkurat Mono 14px"
-   - Marcadores de registro cuadrados laterales
+   HERO.CSS — Gear Reveal Central Stage (Composición Limpia y Sin Colisiones)
+   - Texto limpio e independiente a la izquierda
+   - Foto de Miguel integrada armónicamente a la derecha con máscara suave
+   - Anillos concéntricos de estadio centrados en el área visual derecha
+   - Cero colisiones entre tipografía y retrato
 ============================================================================ */
 
 .hero {
@@ -13,137 +11,11 @@
   display: flex;
   align-items: center;
   position: relative;
-  padding-top: calc(var(--nav-h) + 1rem);
+  padding-top: calc(var(--nav-h) + 1.5rem);
   padding-bottom: var(--space-5);
   overflow: hidden;
 }
 
-/* ---------------- Anillos Concéntricos de Estadio (SVG Central) ---------------- */
-.stadium-stage {
-  position: absolute;
-  top: 50%;
-  left: 55%;
-  transform: translate(-50%, -50%);
-  width: min(720px, 68vw);
-  aspect-ratio: 1 / 1.35;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.85;
-}
-
-.stadium-stage svg {
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.2));
-}
-
-.stadium-contour {
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.22);
-  stroke-width: 1.2;
-  transition: stroke 0.2s ease;
-  transform-origin: center;
-}
-
-.stadium-contour:nth-child(even) {
-  stroke: rgba(255, 255, 255, 0.12);
-  stroke-dasharray: 8 6;
-}
-
-.stadium-contour--core {
-  stroke: var(--c-red);
-  stroke-width: 2.2;
-  filter: drop-shadow(0 0 12px var(--c-red));
-  animation: contour-pulse 3s infinite alternate ease-in-out;
-}
-
-@keyframes contour-pulse {
-  0% { transform: scale(1); stroke: var(--c-red); }
-  50% { transform: scale(1.02); stroke: #ff4d4d; }
-  100% { transform: scale(0.98); stroke: var(--c-red); }
-}
-
-/* ---------------- Título Mega Ultra-Wide de Fondo (Estilo "CO2") ---------------- */
-.hero__mega-title {
-  position: absolute;
-  top: 48%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  text-align: center;
-  font-family: var(--font-wide);
-  font-size: var(--fs-mega);
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: var(--c-white);
-  line-height: 0.85;
-  text-transform: uppercase;
-  user-select: none;
-  pointer-events: none;
-  z-index: 2;
-  opacity: 0.95;
-  text-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
-}
-
-.hero__mega-title span {
-  display: inline-block;
-  transition: transform 0.2s ease-out;
-}
-
-/* ---------------- Foto de Miguel (Sujeto Flotante Central Orgánico) ---------------- */
-.hero__portrait-stage {
-  position: absolute;
-  top: 50%;
-  right: -2%;
-  transform: translateY(-50%);
-  width: min(52%, 620px);
-  aspect-ratio: 3 / 4;
-  z-index: 3;
-  pointer-events: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: levitate-portrait 5s infinite ease-in-out;
-}
-
-.hero__portrait-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 20%;
-  filter: contrast(1.1) brightness(1.02) saturate(1.05);
-  -webkit-mask-image: radial-gradient(ellipse 70% 75% at 50% 45%, black 45%, transparent 88%);
-  mask-image: radial-gradient(ellipse 70% 75% at 50% 45%, black 45%, transparent 88%);
-  transition: transform 0.25s var(--ease-quick), filter 0.25s ease;
-  pointer-events: auto;
-  cursor: pointer;
-}
-
-.hero__portrait-img:hover {
-  filter: contrast(1.15) brightness(1.08) saturate(1.12);
-}
-
-/* Halo Rojo Volcánico tras la foto */
-.hero__portrait-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: 100%;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(circle, rgba(255, 0, 0, 0.35) 0%, rgba(36, 3, 6, 0.1) 60%, transparent 80%);
-  filter: blur(40px);
-  z-index: -1;
-  pointer-events: none;
-}
-
-@keyframes levitate-portrait {
-  0%, 100% { transform: translateY(-50%) translate3d(0, 0px, 0); }
-  50% { transform: translateY(-50%) translate3d(0, -14px, 0); }
-}
-
-/* ---------------- Contenido Principal del Hero (Izquierda) ---------------- */
 .hero__inner {
   position: relative;
   z-index: 5;
@@ -151,13 +23,17 @@
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
   align-items: center;
+  gap: var(--space-4);
 }
 
+/* ---------------- Columna Izquierda: Contenido & Tipografía ---------------- */
 .hero__content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  max-width: 650px;
+  max-width: 600px;
+  position: relative;
+  z-index: 10;
 }
 
 /* Badge de Disponibilidad con LED Pulsante */
@@ -171,7 +47,7 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--c-white);
-  background: rgba(20, 2, 4, 0.82);
+  background: rgba(20, 2, 4, 0.85);
   border: 1px solid rgba(255, 0, 0, 0.45);
   padding: 0.45rem 1.2rem;
   border-radius: var(--radius-pill);
@@ -189,12 +65,7 @@
   animation: pulse-red 1.6s infinite ease-in-out;
 }
 
-@keyframes pulse-red {
-  0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 8px var(--c-red); }
-  50% { opacity: 0.4; transform: scale(1.4); box-shadow: 0 0 18px var(--c-red); }
-}
-
-/* Brand Micro-Logo Estilo "acme©" de la imagen 2 */
+/* Brand Lockup estilo acme© con caja técnica Akkurat Mono */
 .hero__brand-lockup {
   display: flex;
   align-items: center;
@@ -222,7 +93,7 @@
 }
 
 .hero__engineered-box {
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   padding: 0.35rem 0.75rem;
   font-family: var(--font-mono);
   font-size: 11px;
@@ -230,9 +101,10 @@
   text-transform: uppercase;
   color: var(--c-gray);
   line-height: 1.35;
+  border-radius: 4px;
 }
 
-/* Titular Principal */
+/* Titular Principal Limpio */
 .hero__title {
   font-family: var(--font-display);
   font-size: var(--fs-hero);
@@ -246,7 +118,7 @@
 
 .hero__title span.highlight {
   color: var(--c-red);
-  text-shadow: 0 0 25px rgba(255, 0, 0, 0.45);
+  text-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
 }
 
 /* Rotador de Roles con Láser */
@@ -273,17 +145,12 @@
   animation: blink 0.8s infinite step-end;
 }
 
-@keyframes blink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
-}
-
 /* Bio */
 .hero__bio {
-  font-size: clamp(1rem, 1.35vw, 1.12rem);
+  font-size: clamp(1rem, 1.3vw, 1.12rem);
   line-height: 1.65;
   color: var(--c-gray);
-  max-width: 580px;
+  max-width: 540px;
   margin-bottom: var(--space-4);
 }
 
@@ -320,7 +187,7 @@
   content: none;
 }
 
-/* Botones Hero */
+/* Acciones Hero */
 .hero__actions {
   display: flex;
   align-items: center;
@@ -328,32 +195,186 @@
   gap: 1rem;
 }
 
+/* ---------------- Columna Derecha: Escenario Visual Limpio ---------------- */
+.hero__stage-right {
+  position: relative;
+  width: 100%;
+  height: 580px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  pointer-events: none;
+}
+
+/* Anillos Concéntricos de Estadio en el Escenario Derecho */
+.stadium-stage {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+  width: min(540px, 45vw);
+  aspect-ratio: 1 / 1.3;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.85;
+}
+
+.stadium-stage svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.25));
+  animation: stadium-rotate 8s infinite alternate ease-in-out;
+}
+
+.stadium-contour {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 1.2;
+  transition: stroke 0.2s ease;
+  transform-origin: center;
+}
+
+.stadium-contour:nth-child(even) {
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-dasharray: 8 6;
+}
+
+.stadium-contour--core {
+  stroke: var(--c-red);
+  stroke-width: 2.2;
+  filter: drop-shadow(0 0 12px var(--c-red));
+  animation: contour-pulse 3s infinite alternate ease-in-out;
+}
+
+/* Marca de Agua "MB" Sutil a la Derecha (Sin Colisionar) */
+.hero__stage-watermark {
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  transform: translateY(-50%);
+  font-family: var(--font-wide);
+  font-size: clamp(5rem, 12vw, 10rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #FFFFFF;
+  opacity: 0.08;
+  line-height: 0.8;
+  user-select: none;
+  pointer-events: none;
+  z-index: 2;
+  text-shadow: 0 0 40px rgba(255, 0, 0, 0.1);
+}
+
+/* Foto de Miguel Integrada a la Derecha */
+.hero__portrait-stage {
+  position: relative;
+  width: min(100%, 480px);
+  height: 560px;
+  z-index: 3;
+  pointer-events: auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  animation: levitate-portrait 5s infinite ease-in-out;
+}
+
+.hero__portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  filter: contrast(1.1) brightness(1.02) saturate(1.05);
+  /* Máscara suave que desvanece el borde izquierdo e inferior hacia la oscuridad */
+  -webkit-mask-image: radial-gradient(ellipse 65% 75% at 65% 45%, black 45%, transparent 88%);
+  mask-image: radial-gradient(ellipse 65% 75% at 65% 45%, black 45%, transparent 88%);
+  transition: transform 0.25s var(--ease-quick), filter 0.25s ease;
+  cursor: pointer;
+}
+
+.hero__portrait-img:hover {
+  filter: contrast(1.15) brightness(1.08) saturate(1.12);
+}
+
+/* Halo Volcánico tras la foto */
+.hero__portrait-glow {
+  position: absolute;
+  top: 50%;
+  right: 15%;
+  width: 90%;
+  height: 90%;
+  transform: translate(0, -50%);
+  background: radial-gradient(circle, rgba(255, 0, 0, 0.35) 0%, rgba(36, 3, 6, 0.1) 60%, transparent 80%);
+  filter: blur(45px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Micro-etiquetas flotantes en el área derecha */
+.hero__stage-tag {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-white);
+  background: rgba(18, 2, 4, 0.85);
+  border: 1px solid rgba(255, 0, 0, 0.4);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6), 0 0 10px rgba(255, 0, 0, 0.25);
+  z-index: 4;
+}
+
+.hero__stage-tag--top {
+  top: 40px;
+  right: 40px;
+}
+
+.hero__stage-tag--bottom {
+  bottom: 50px;
+  right: 20px;
+}
+
 /* ---------------- Responsive Hero ---------------- */
 @media (max-width: 1024px) {
   .hero__inner {
     grid-template-columns: 1fr;
-    text-align: left;
+    gap: var(--space-5);
   }
 
-  .hero__portrait-stage {
-    position: relative;
-    right: auto;
-    top: auto;
-    transform: none;
-    width: min(75%, 400px);
-    margin: var(--space-4) auto 0 auto;
-    animation: none;
+  .hero__content {
+    max-width: 100%;
+  }
+
+  .hero__stage-right {
+    height: 440px;
+    justify-content: center;
   }
 
   .stadium-stage {
-    left: 50%;
-    width: min(600px, 85vw);
-    opacity: 0.55;
+    right: 50%;
+    transform: translate(50%, -50%);
+    width: min(500px, 85vw);
+    opacity: 0.65;
   }
 
-  .hero__mega-title {
-    font-size: clamp(3rem, 15vw, 6rem);
-    opacity: 0.4;
+  .hero__stage-watermark {
+    right: 50%;
+    transform: translate(50%, -50%);
+    font-size: clamp(4rem, 16vw, 7rem);
+  }
+
+  .hero__portrait-stage {
+    width: min(85%, 380px);
+    height: 440px;
+    justify-content: center;
+  }
+
+  .hero__portrait-img {
+    -webkit-mask-image: radial-gradient(ellipse 65% 70% at 50% 45%, black 45%, transparent 88%);
+    mask-image: radial-gradient(ellipse 65% 70% at 50% 45%, black 45%, transparent 88%);
   }
 }
 
