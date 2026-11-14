@@ -38,6 +38,7 @@
   --text-low:           #A2A4B8;              /* Micro-detalles legibles */
 
   /* ---- Tipografía ---- */
+  --font-brand:         'Syne', 'Unbounded', sans-serif;
   --font-wide:          'Syncopate', 'Michroma', 'Unbounded', sans-serif;
   --font-display:       'Unbounded', 'Syncopate', sans-serif;
   --font-mono:          'JetBrains Mono', 'Space Mono', 'Courier New', monospace;

@@ -10,6 +10,8 @@
 html {
   scroll-behavior: smooth;
   background-color: var(--bg-void);
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 body {
@@ -24,6 +26,20 @@ body {
   overflow-x: hidden;
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Canvas del shader de fondo asegurando 100% de cobertura en móviles */
+#particle-canvas {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Sutil ruido/grano de película tipo dither shader */
@@ -31,6 +47,11 @@ body::after {
   content: '';
   position: fixed;
   inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
   background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
   background-size: 28px 28px;
   pointer-events: none;

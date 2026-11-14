@@ -75,12 +75,12 @@
 }
 
 .hero__acme-brand {
-  font-family: var(--font-body);
+  font-family: var(--font-brand);
   font-size: 1.85rem;
   font-weight: 800;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
   color: var(--c-white);
-  text-transform: lowercase;
+  text-transform: none; /* Permite escribir en mayúsculas o minúsculas sin forzar minúsculas */
   display: inline-flex;
   align-items: baseline;
   gap: 0.15em;
@@ -358,6 +358,11 @@
   .hero__portrait-stage {
     width: min(92vw, 350px);
     height: 380px;
+  }
+
+  .hero__portrait-img {
+    -webkit-mask-image: linear-gradient(to bottom, #000000 68%, rgba(0, 0, 0, 0.4) 84%, transparent 96%);
+    mask-image: linear-gradient(to bottom, #000000 68%, rgba(0, 0, 0, 0.4) 84%, transparent 96%);
   }
 
   .hero__actions {

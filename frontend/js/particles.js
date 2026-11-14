@@ -196,15 +196,20 @@ function initWebGLDither(canvas, gl) {
     // Escala optimizada para 60fps constantes sin sobrecargar la GPU
     const scale = 0.75;
     width = window.innerWidth;
-    height = window.innerHeight;
+    // En móviles, cubrir siempre la altura máxima de la pantalla para evitar cortes al ocultar barras del navegador
+    height = Math.max(window.innerHeight, (window.screen && window.screen.height) || 0, document.documentElement.clientHeight);
     canvas.width = Math.max(1, Math.floor(width * scale));
     canvas.height = Math.max(1, Math.floor(height * scale));
-    canvas.style.width = width + 'px';
-    canvas.style.height = height + 'px';
+    canvas.style.width = '100vw';
+    canvas.style.height = '100dvh';
     gl.viewport(0, 0, canvas.width, canvas.height);
   }
 
   window.addEventListener('resize', resize, { passive: true });
+  window.addEventListener('orientationchange', resize, { passive: true });
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', resize, { passive: true });
+  }
   resize();
 
   window.addEventListener('mousemove', (e) => {
@@ -251,11 +256,17 @@ function initCanvas2DTopography(canvas) {
   let width, height;
   function resize() {
     width = window.innerWidth;
-    height = window.innerHeight;
+    height = Math.max(window.innerHeight, (window.screen && window.screen.height) || 0, document.documentElement.clientHeight);
     canvas.width = width;
     canvas.height = height;
+    canvas.style.width = '100vw';
+    canvas.style.height = '100dvh';
   }
   window.addEventListener('resize', resize, { passive: true });
+  window.addEventListener('orientationchange', resize, { passive: true });
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', resize, { passive: true });
+  }
   resize();
 
   let t = 0;

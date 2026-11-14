@@ -43,7 +43,7 @@
 .nav__brand {
   display: flex;
   align-items: center;
-  font-family: var(--font-body);
+  font-family: var(--font-brand);
   cursor: pointer;
   padding: 0.25rem 0.5rem;
   transition: transform var(--dur-fast) ease;
