@@ -27,5 +27,13 @@ module.exports = async (req, res) => {
     return;
   }
 
+  // Protección: Ocultar y denegar acceso público en el navegador a los mensajes recibidos
+  const secretKey = process.env.ADMIN_SECRET || 'mb-admin-secret';
+  const authKey = req.headers['x-admin-key'] || req.query.key;
+  if (!authKey || authKey !== secretKey) {
+    res.status(404).send('Not Found');
+    return;
+  }
+
   res.status(200).json(readMessages());
 };

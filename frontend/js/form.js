@@ -83,20 +83,23 @@ document.addEventListener('DOMContentLoaded', () => {
     let sent = false;
 
     // 1. Si el backend local está corriendo en localhost:3000, enviar directo con Nodemailer Gmail
-    try {
-      const localRes = await fetch('http://localhost:3000/api/contacto', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      if (localRes.ok) {
-        const localData = await localRes.json();
-        if (localData.ok) {
-          sent = true;
+    const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    if (isLocalhost) {
+      try {
+        const localRes = await fetch('http://localhost:3000/api/contacto', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (localRes.ok) {
+          const localData = await localRes.json();
+          if (localData.ok) {
+            sent = true;
+          }
         }
+      } catch {
+        // Backend local no disponible en este momento
       }
-    } catch {
-      // Backend local no disponible en este momento
     }
 
     // 2. Si no, enviar vía Cloudflare Pages Function /api/contacto

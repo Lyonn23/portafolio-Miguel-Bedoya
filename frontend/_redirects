@@ -1,7 +1,13 @@
-/portafolio   /index.html   200
-/inicio       /index.html   200
-/contacto     /index.html   200
-/desarrollo   /index.html   200
-/fotografia   /index.html   200
-/contenido    /index.html   200
-/video        /index.html   200
+/portafolio     /index.html   200
+/inicio         /index.html   200
+/contacto       /index.html   200
+/desarrollo     /index.html   200
+/fotografia     /index.html   200
+/contenido      /index.html   200
+/video          /index.html   200
+
+# Bloquear acceso a rutas o archivos de backend en el navegador
+/backend/*      /404          404
+/api/mensajes   /404          404
+/.env*          /404          404
+/node_modules/* /404          404
