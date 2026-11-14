@@ -80,7 +80,7 @@
   font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--c-white);
-  text-transform: uppercase !important;
+  text-transform: none;
   display: inline-flex;
   align-items: baseline;
   gap: 0.15em;
