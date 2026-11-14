@@ -75,12 +75,12 @@
 }
 
 .hero__acme-brand {
-  font-family: var(--font-brand);
+  font-family: var(--font-body) !important;
   font-size: 1.85rem;
   font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--c-white);
-  text-transform: none; /* Permite escribir en mayúsculas o minúsculas sin forzar minúsculas */
+  text-transform: uppercase !important;
   display: inline-flex;
   align-items: baseline;
   gap: 0.15em;
