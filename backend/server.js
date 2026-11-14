@@ -28,24 +28,6 @@ const MESSAGES_FILE = path.join(__dirname, 'mensajes.json');
 
 app.use(cors());
 app.use(express.json());
-
-// Ocultar y bloquear acceso a archivos sensibles, backend y dotfiles en el navegador
-app.use((req, res, next) => {
-  const p = req.path.toLowerCase();
-  if (
-    p.includes('backend') ||
-    p.includes('node_modules') ||
-    p.includes('.env') ||
-    p.includes('mensajes.json') ||
-    p.includes('package.json') ||
-    p.includes('raw_assets') ||
-    p.startsWith('/.')
-  ) {
-    return res.status(404).send('Not Found');
-  }
-  next();
-});
-
 app.use(express.static(path.join(__dirname, '..', 'frontend'))); // sirve el sitio también desde aquí si quieres
 
 /* ---------------- Utilidades ---------------- */
@@ -128,13 +110,8 @@ app.post('/api/contacto', (req, res) => {
   res.json({ ok: true, message: 'Mensaje recibido correctamente.' });
 });
 
-// Listar mensajes recibidos (protegido: no visible públicamente en el navegador)
+// Listar mensajes recibidos (protégelo o quítalo antes de producción real)
 app.get('/api/mensajes', (req, res) => {
-  const secretKey = process.env.ADMIN_SECRET || 'mb-admin-secret';
-  const authKey = req.headers['x-admin-key'] || req.query.key;
-  if (!authKey || authKey !== secretKey) {
-    return res.status(404).send('Not Found');
-  }
   res.json(readMessages());
 });
 
